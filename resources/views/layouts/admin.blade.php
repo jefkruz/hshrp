@@ -7,10 +7,10 @@
     <meta name="keywords" content="christ,embassy,report,finance">
     <meta name="author" content="{{env('DEV')}}">
     <meta name="robots" content="noindex, nofollow">
-    <title>{{$page_title}} - {{env('APP_NAME')}}</title>
+    <title>{{$page_title}} - HS HR PORTAL</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{url('assets/images/72x72.png')}}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{url('assets/images/logo.png')}}">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{url('assets/css/bootstrap.min.css')}}">
@@ -29,7 +29,7 @@
     <script src="{{url('assets/js/html5shiv.min.js')}}"></script>
     <script src="{{url('assets/js/respond.min.js')}}"></script>
     <![endif]-->
-    @laravelPWA
+
     @yield('style')
 </head>
 <body>
@@ -68,7 +68,7 @@
 
             <li class="nav-item dropdown has-arrow main-drop">
                 <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-							<span class="user-img"><img src="{{url('assets/images/default-avatar.png')}}" alt="">
+							<span class="user-img"><img src="{{session('admin')->image}}" alt="">
 							<span class="status online"></span></span>
                     @if(session('admin'))
                     <span>{{session('admin')->name}}</span>
@@ -77,7 +77,7 @@
                     @endif
                 </a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{{route('changePassword')}}"><i class="fa fa-key"></i> Security Setting</a>
+{{--                    <a class="dropdown-item" href="{{route('changePassword')}}"><i class="fa fa-key"></i> Security Setting</a>--}}
                     <a class="dropdown-item" href="{{route('logout')}}"><i class="fa fa-power-off"></i> Logout</a>
                 </div>
             </li>

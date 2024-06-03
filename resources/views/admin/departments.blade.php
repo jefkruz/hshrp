@@ -29,7 +29,9 @@
                                 @foreach($departments as $i => $department)
                                 <tr>
                                     <td>{{$i + 1}}</td>
-                                    <td>{{$department->subs->name}}</td>
+                                    <td>
+                                        {{$department->subs->name}}
+                                    </td>
                                     <td>{{$department->name}}</td>
                                     <td>
                                         {{$department->leader()->fullname ?? ''}}

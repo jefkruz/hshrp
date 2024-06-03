@@ -10,7 +10,7 @@
     <title>Authentication - {{env('APP_NAME')}}</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{url('assets/images/72x72.png')}}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{url('assets/images/logo.png')}}">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{url('assets/css/bootstrap.min.css')}}">
@@ -26,7 +26,7 @@
     <script src="{{url('assets/js/html5shiv.min.js')}}"></script>
     <script src="{{url('assets/js/respond.min.js')}}"></script>
     <![endif]-->
-    @laravelPWA
+
 </head>
 <body class="account-page" style="background-color: #34346b">
 
@@ -50,20 +50,15 @@
                     @endif
 
                 <!-- Account Form -->
-                    <form method="post" action="{{route($person['route'])}}">
-                        @csrf
-                        <div class="form-group">
-                            <label>Username</label>
-                            <input class="form-control" type="text" value="{{old('username')}}" placeholder="username" name="username" required>
+
+                        <div class="form-group mt-5 text-center">
+                            <div class="form-group  mt-5 text-center">
+                                <a href="https://accounts.kingsch.at/?client_id=com.kingschat&scopes=[%22conference_calls%22]&post_redirect=true&redirect_uri={{route('adminLogin')}}" class="btn btn-outline-primary btn-block">
+                                    <img src="https://kingsch.at/h/css/images/favicon.ico" alt="">
+                                    Login with KingsChat
+                                </a>
                         </div>
-                        <div class="form-group">
-                            <label>Password</label>
-                            <input class="form-control" type="password" placeholder="Password" name="password" required>
-                        </div>
-                        <div class="form-group text-center">
-                            <button class="btn btn-primary account-btn" type="submit">Login</button>
-                        </div>
-                    </form>
+
                     <!-- /Account Form -->
 
                 </div>

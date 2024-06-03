@@ -40,6 +40,7 @@ return new class extends Migration
             $table->string('gender')->nullable();
             $table->string('nationality')->nullable();
             $table->enum('is_leader', ['yes', 'no'])->default('no');
+            $table->string('kc_token')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

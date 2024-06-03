@@ -20,12 +20,11 @@
                                 <tr>
                                     <th>#</th>
                                     <th>NAME</th>
-                                    <th>PORTAL ID</th>
+                                    <th>KC USERNAME</th>
                                     <th>UNIT</th>
-                                    <th>DESIGNATION</th>
+                                    <th>PHONE</th>
                                     <th>EMAIL</th>
-                                    <th>GENDER</th>
-                                    <th>NATIONALITY</th>
+
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -33,12 +32,11 @@
                                     <tr>
                                         <td>{{$i + 1}}</td>
                                         <td><a href="{{route($view_route, $item->id)}}">{{$item->title}} {{$item->firstname}} {{$item->lastname}} @if($item->is_leader == 'yes')<small class="text-danger"> :: SUPERVISOR</small>@endif</a></td>
-                                        <td>{{$item->portal_id}}</td>
+                                        <td>{{$item->username}}</td>
                                         <td>{{$item->department()->name}}</td>
-                                        <td>{{$item->designation}}</td>
-                                        <td>{{$item->email}}</td>
-                                        <td>{{$item->gender}}</td>
-                                        <td>{{$item->nationality}}</td>
+                                        <td>{{$item->phone ?? ''}}</td>
+                                        <td>{{$item->email ?? ''}}</td>
+
                                     </tr>
                                 @endforeach
                                 </tbody>
@@ -68,11 +66,25 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="">Portal ID</label>
-                                    <input type="text" class="form-control" name="portal_id" placeholder="Portal ID" required>
+                                    <label for="">KingsChat Username</label>
+                                    <input type="text" class="form-control" name="username" placeholder="KC Username    " required>
                                 </div>
                             </div>
-
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="">Title</label>
+                                    <select class="form-control form-select "  required name="title" >
+                                        <option value="" >--Select--</option>
+                                        <option value="Brother" >Brother</option>
+                                        <option value="Sister" >Sister</option>
+                                        <option value="Pastor" >Pastor</option>
+                                        <option value="Deacon" >Deacon</option>
+                                        <option value="Deaconess" >Deaconess</option>
+                                        <option value="Evangelist" >Evangelist</option>
+                                        <option value="Reverend" >Reverend</option>
+                                    </select>
+                                </div>
+                            </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="">Firstname</label>
@@ -87,7 +99,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="">Unit</label>
                                     <select name="department_id" class="form-control" required>

@@ -10,7 +10,7 @@
     <title>Login - {{env('APP_NAME')}}</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{url('assets/images/72x72.png')}}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{url('assets/images/logo.png')}}">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{url('assets/css/bootstrap.min.css')}}">
@@ -26,7 +26,7 @@
     <script src="{{url('assets/js/html5shiv.min.js')}}"></script>
     <script src="{{url('assets/js/respond.min.js')}}"></script>
     <![endif]-->
-    @laravelPWA
+
 </head>
 <body class="account-page">
 
@@ -43,40 +43,21 @@
 
             <div class="account-box">
                 <div class="account-wrapper">
-                    <h3 class="account-title">Login with your Staff Portal Credentials</h3>
+                    <h3 class="account-title">Login with your KingsChat Credentials</h3>
 
                     @if(session('error'))
                     <div class="alert alert-danger">{{session('error')}}</div>
                     @endif
 
                     <!-- Account Form -->
-                    <form method="post">
-                        @csrf
-                        <div class="form-group">
-                            <label>Your Portal ID</label>
-                            <input class="form-control" type="text" value="{{old('portal_id')}}" placeholder="Your Portal ID" name="portal_id" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Password</label>
-                            <input class="form-control" type="password" placeholder="Password" name="password" required>
-                        </div>
-                        <div class="form-group text-center">
-                            <button class="btn btn-primary account-btn" type="submit">Login</button>
+
+                        <div class="form-group  mt-5 text-center">
+                            <a href="https://accounts.kingsch.at/?client_id=com.kingschat&scopes=[%22conference_calls%22]&post_redirect=true&redirect_uri={{route('adminLogin')}}" class="btn btn-outline-primary btn-block">
+                                <img src="https://kingsch.at/h/css/images/favicon.ico" alt="">
+                                Login with KingsChat
+                            </a>
                         </div>
 
-                        <div class="row">
-                            <hr>
-                            <div class="col-md-6 p-2">
-
-                                <a href="{{route('showAdminLogin', 'admin')}}" class="btn btn-purple btn-block">Admin Login</a>
-                            </div>
-                            <div class="col-md-6 p-2">
-
-                                <a href="{{route('showAdminLogin', 'director')}}" class="btn btn-danger btn-block">Director Login</a>
-                            </div>
-                        </div>
-                    </form>
-                    <!-- /Account Form -->
 
                 </div>
             </div>

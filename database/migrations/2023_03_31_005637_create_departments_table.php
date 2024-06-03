@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('departments', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('sub_id')->nullable();
+            $table->string('sub_id')->default(1);
             $table->integer('leader_id')->nullable();
             $table->enum('status', ['assigned', 'unassigned'])->default('unassigned');
             $table->timestamps();

@@ -10,7 +10,7 @@
     <title>{{$page_title}} - {{env('APP_NAME')}}</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{url('assets/images/72x72.png')}}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{url('assets/images/logo.png')}}">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{url('assets/css/bootstrap.min.css')}}">
@@ -29,7 +29,7 @@
     <script src="{{url('assets/js/html5shiv.min.js')}}"></script>
     <script src="{{url('assets/js/respond.min.js')}}"></script>
     <![endif]-->
-    @laravelPWA
+
     @yield('style')
 </head>
 <body>

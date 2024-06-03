@@ -8,6 +8,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DepartmentsController;
 use App\Http\Controllers\DirectorController;
 use App\Http\Controllers\GoalsController;
+use App\Http\Controllers\KcController;
 use App\Http\Controllers\PlatformController;
 use App\Http\Controllers\ProjectsController;
 use App\Http\Controllers\StaffController;
@@ -25,15 +26,17 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
+
 Route::get('login', [AuthController::class, 'showLogin'])->name('login');
 Route::get('auth/login/{person}', [AuthController::class, 'showAdminLogin'])->name('showAdminLogin');
+Route::get('kc/admin/auth/{token}', [KcController::class, 'successfulAdminLogin'])->name('kcAdminAuth');
+Route::get('kc/staff/auth/{token}', [KcController::class, 'successfulStaffLogin'])->name('kcAStaffAuth');
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
-Route::post('login', [AuthController::class, 'staffLogin']);
 
-Route::group(['prefix' => 'authenticate'], function(){
-    Route::post('login/admin', [AuthController::class, 'adminLogin'])->name('adminLogin');
-    Route::post('login/director', [AuthController::class, 'directorLogin'])->name('directorLogin');
-});
+
+
 
 Route::group(['middleware' => 'isStaff'], function(){
     Route::get('/', [PlatformController::class, 'dashboard'])->name('dashboard');
@@ -95,6 +98,7 @@ Route::group(['middleware' => 'isDirector', 'prefix' => 'director'], function(){
 });
  Route::get('change/password', [DashboardController::class, 'changePassword'])->name('changePassword');
  Route::post('update/password', [DashboardController::class, 'updatePassword'])->name('updatePassword');
+
 Route::get('clear', function() {
 
     Artisan::call('cache:clear');

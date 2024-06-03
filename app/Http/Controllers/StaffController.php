@@ -53,21 +53,23 @@ class StaffController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'portal_id' => 'required',
+            'title' => 'required',
+            'username' => 'required',
             'firstname' => 'required',
             'lastname' => 'required',
             'department_id' => 'required',
         ]);
 
-        $staffExists = Staff::where('portal_id', $request->portal_id)->exists();
+        $staffExists = Staff::where('username', $request->username)->exists();
         if($staffExists){
-            return back()->with('error', 'Portal ID exists');
+            return back()->with('error', 'KC Username exists');
         }
 
         $staff = new Staff();
+        $staff->title = $request->title;
         $staff->firstname = $request->firstname;
         $staff->lastname = $request->lastname;
-        $staff->portal_id = $request->portal_id;
+        $staff->username = $request->username;
         $staff->department_id = $request->department_id;
         $staff->save();
 

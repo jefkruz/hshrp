@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\TblUser;
-use App\Models\User;
+use App\Models\Admin;
+use App\Models\Staff;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -21,7 +22,41 @@ class KcController extends Controller
         $intendedUrl = session('url.intended', route('home'));
         return redirect($intendedUrl);
     }
+    public function successfulAdminLogin($token)
+    {
+        $admin = Admin::where('kc_token',$token)->firstOrFail();
+        $admin->kc_token = null;
+        $admin->save();
+        session()->put('admin', $admin);
 
+        session()->put('admin', $admin);
+        return to_route('admin.index');
+    }
+
+    public function authorizeAdminLogin(Request $request)
+    {
+
+        $accessToken = $request->accessToken;
+        $profile = $this->fetchKcProfile($accessToken)->profile;
+
+        $username = $profile->user->username;
+        $phone = $profile->phone_number;
+        $phone = str_replace('+', '', $phone);
+
+        $admin = Admin::where('username',$username)->first();
+        if(!$admin){
+            return redirect()->route('login')->with('message','Record Not Found');
+
+        }
+
+        $admin->kc_token = md5(time(). uniqid());
+        $admin->image = $profile->user->avatar_url;
+        $admin->phone =$phone;
+        $admin->email =$profile->email->address;
+        $admin->save();
+        return redirect()->route('kcAdminAuth',$admin->kc_token);
+
+    }
     public function authorizeLogin(Request $request)
     {
 
@@ -32,7 +67,7 @@ class KcController extends Controller
         $phone = $profile->phone_number;
         $phone = str_replace('+', '', $phone);
 
-        $staff = User::where('kcUsername',$username)->first();
+        $staff = Staff::where('username',$username)->first();
         if(!$staff){
             return redirect()->route('login')->with('message','Record Not Found');
 
@@ -43,6 +78,7 @@ class KcController extends Controller
         return redirect()->route('kcAuth',$staff->kcAccessToken);
 
     }
+
     private function fetchKcProfile($accessToken)
     {
         $curl = curl_init();
@@ -67,4 +103,5 @@ class KcController extends Controller
         return json_decode($response);
 
     }
+
 }

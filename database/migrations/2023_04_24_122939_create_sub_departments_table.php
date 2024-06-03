@@ -18,13 +18,13 @@ return new class extends Migration
             $table->string('name');
             $table->timestamps();
         });
+        $d = new \App\Models\SubDepartment();
+        $d->name = 'Healing School';
+        $d->save();
+
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+
     public function down()
     {
         Schema::dropIfExists('sub_departments');
