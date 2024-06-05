@@ -22,47 +22,23 @@
     <link rel="stylesheet" href="{{url('assets/css/style.css')}}">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
+<!--[if lt IE 9]>
     <script src="{{url('assets/js/html5shiv.min.js')}}"></script>
     <script src="{{url('assets/js/respond.min.js')}}"></script>
     <![endif]-->
 
 </head>
-<body class="account-page">
-
+<body class="error-page">
 <!-- Main Wrapper -->
 <div class="main-wrapper">
-    <div class="account-content">
-        <div class="container">
 
-            <!-- Account Logo -->
-            <div class="account-logo">
-                <a href="{{route('login')}}"><img src="{{url('assets/images/logo.png')}}" alt=""></a>
-            </div>
-            <!-- /Account Logo -->
-
-            <div class="account-box">
-                <div class="account-wrapper">
-                    <h3 class="account-title">Login with your KingsChat Credentials</h3>
-
-                    @if(session('error'))
-                    <div class="alert alert-danger">{{session('error')}}</div>
-                    @endif
-
-                    <!-- Account Form -->
-
-                        <div class="form-group  mt-5 text-center">
-                            <a href="https://accounts.kingsch.at/?client_id=com.kingschat&scopes=[%22conference_calls%22]&post_redirect=true&redirect_uri={{route('authLogin')}}" class="btn btn-outline-primary btn-block">
-                                <img src="https://kingsch.at/h/css/images/favicon.ico" alt="">
-                                Login with KingsChat
-                            </a>
-                        </div>
-
-
-                </div>
-            </div>
-        </div>
+    <div class="error-box">
+        <h1>Sorry!</h1>
+        <h3><i class="fa fa-warning"></i>  No Profile was found for this Kingschat Account!</h3>
+        <p>Please contact your Admin for more information.</p>
+        <a href="{{route('login')}}" class="btn btn-custom">Back to Login</a>
     </div>
+
 </div>
 <!-- /Main Wrapper -->
 

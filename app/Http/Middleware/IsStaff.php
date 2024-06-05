@@ -16,6 +16,10 @@ class IsStaff
      */
     public function handle(Request $request, Closure $next)
     {
-        return (session('staff')) ? $next($request) : to_route('login');
+        if (!session('staff')) {
+            session(['url.intended' => url()->current()]);
+            return redirect()->route('login');
+        }
+        return $next($request);
     }
 }

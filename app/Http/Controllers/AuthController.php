@@ -11,6 +11,9 @@ class AuthController extends Controller
 {
     public function showLogin()
     {
+        if(session('staff')){
+            return redirect()->route('dashboard');
+        }
         return view('authentication.login');
     }
 

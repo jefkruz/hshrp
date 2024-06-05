@@ -73,7 +73,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="">Title</label>
-                                    <select class="form-control form-select "  required name="title" >
+                                    <select class="form-control select "  required name="title" >
                                         <option value="" >--Select--</option>
                                         <option value="Brother" >Brother</option>
                                         <option value="Sister" >Sister</option>
@@ -87,22 +87,29 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="">Firstname</label>
+                                    <label for="">First Name</label>
                                     <input type="text" class="form-control" name="firstname" placeholder="First name" required>
                                 </div>
                             </div>
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="">Lastname</label>
+                                    <label for="">Last Name</label>
                                     <input type="text" class="form-control" name="lastname" placeholder="Last name" required>
                                 </div>
                             </div>
 
-                            <div class="col-md-12">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="">Official Email</label>
+                                    <input type="text" class="form-control" name="email" placeholder="Official Email" required>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="">Unit</label>
-                                    <select name="department_id" class="form-control" required>
+                                    <select name="department_id" class=" select form-control" required>
                                         <option value="">--Select unit--</option>
                                         @foreach($departments as $dept)
                                             <option value="{{$dept->id}}">{{$dept->name}}</option>

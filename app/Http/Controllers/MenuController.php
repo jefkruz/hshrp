@@ -123,6 +123,12 @@ class MenuController extends Controller
                 'active' => $route == 'dashboard' ? 'active' : ''
             ],
             [
+                'name' => 'My Profile',
+                'route' => 'profile',
+                'icon' => 'la la-user',
+                'active' => $route == 'profile' ? 'active' : ''
+            ],
+            [
                 'name' => 'Projects',
                 'route' => 'projects',
                 'icon' => 'la la-rocket',

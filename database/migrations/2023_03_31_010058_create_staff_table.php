@@ -38,9 +38,13 @@ return new class extends Migration
             $table->string('t_shirt_size')->nullable();
             $table->string('dress_size')->nullable();
             $table->string('gender')->nullable();
-            $table->string('nationality')->nullable();
+            $table->string('house_address')->nullable();
+            $table->string('bus_stop')->nullable();
+            $table->string('city')->nullable();
+            $table->string('country')->nullable();
             $table->enum('is_leader', ['yes', 'no'])->default('no');
             $table->string('kc_token')->nullable();
+            $table->string('status')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

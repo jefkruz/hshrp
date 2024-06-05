@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Appraisal;
 use App\Models\AppraisalAttribute;
+use App\Models\Country;
 use App\Models\Goal;
+use App\Models\MinistryProfile;
 use App\Models\Project;
 use App\Models\Report;
 use App\Models\Staff;
+use App\Models\Zone;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
@@ -152,10 +155,15 @@ class PlatformController extends Controller
         $m = new MenuController();
         $profile = $s->getProfile($staff);
         $data['page_title'] = 'Profile';
+        $data['countries'] = Country::all();
+        $data['zones'] = Zone::all();
         $data['is_leader'] = $profile['is_leader'];
         $data['department'] = $profile['department'];
         $data['superior'] = $profile['superior'];
+        $data['staff'] = $staff;
         $data['menu'] = $m->fetchMenu();
         return view('profile', $data);
     }
+
+
 }

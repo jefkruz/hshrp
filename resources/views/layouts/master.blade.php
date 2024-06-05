@@ -7,7 +7,7 @@
     <meta name="keywords" content="christ,embassy,report,finance">
     <meta name="author" content="{{env('DEV')}}">
     <meta name="robots" content="noindex, nofollow">
-    <title>{{$page_title}} - {{env('APP_NAME')}}</title>
+    <title>{{$page_title}} - HR PORTAL</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="{{url('assets/images/logo.png')}}">
@@ -20,6 +20,12 @@
 
     <!-- Lineawesome CSS -->
     <link rel="stylesheet" href="{{url('assets/css/line-awesome.min.css')}}">
+
+    <!-- Select2 CSS -->
+    <link rel="stylesheet" href="{{url('assets/css/select2.min.css')}}">
+
+    <!-- Datetimepicker CSS -->
+    <link rel="stylesheet" href="{{url('assets/css/bootstrap-datetimepicker.min.css')}}">
 
     <!-- Main CSS -->
     <link rel="stylesheet" href="{{url('assets/css/style.css')}}">
@@ -149,6 +155,13 @@
 <!-- Bootstrap Core JS -->
 <script src="{{url('assets/js/popper.min.js')}}"></script>
 <script src="{{url('assets/js/bootstrap.min.js')}}"></script>
+
+<!-- Select2 JS -->
+<script src="{{url('assets/js/select2.min.js')}}"></script>
+
+<!-- Datetimepicker JS -->
+<script src="{{url('assets/js/moment.min.js')}}"></script>
+<script src="{{url('assets/js/bootstrap-datetimepicker.min.js')}}"></script>
 
 <!-- Slimscroll JS -->
 <script src="{{url('assets/js/jquery.slimscroll.min.js')}}"></script>

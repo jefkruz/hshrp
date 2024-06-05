@@ -14,12 +14,12 @@ class KcController extends Controller
 
     public function successfulStaffLogin($token)
     {
-        $user = User::where('kcAccessToken',$token)->firstOrFail();
-        $user->kcAccessToken = null;
+        $user = Staff::where('kc_token',$token)->firstOrFail();
+        $user->kc_token = null;
         $user->save();
-        session()->put('user', $user);
+        session()->put('staff', $user);
 
-        $intendedUrl = session('url.intended', route('home'));
+        $intendedUrl = session('url.intended', route('dashboard'));
         return redirect($intendedUrl);
     }
     public function successfulAdminLogin($token)
@@ -69,13 +69,17 @@ class KcController extends Controller
 
         $staff = Staff::where('username',$username)->first();
         if(!$staff){
-            return redirect()->route('login')->with('message','Record Not Found');
+            return view('partials.error');
 
         }
 
-        $staff->kcAccessToken = md5(time(). uniqid());
+        $staff->kc_token = md5(time(). uniqid());
+        $staff->profile_pic = $profile->user->avatar_url;
+        $staff->kc_phone =$phone;
+        $staff->gender =$profile->gender;
+        $staff->alt_email =$profile->email->address;
         $staff->save();
-        return redirect()->route('kcAuth',$staff->kcAccessToken);
+        return redirect()->route('kcStaffAuth',$staff->kc_token);
 
     }
 

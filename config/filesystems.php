@@ -43,6 +43,15 @@ return [
             'visibility' => 'public',
             'throw' => false,
         ],
+        'public_path' => [
+            'driver' => 'local',
+            'root' => public_path() . '/'
+        ],
+
+        'server_path' => [
+            'driver' => 'local',
+            'root' => public_path() . '/../../public_html/',
+        ],
 
         's3' => [
             'driver' => 's3',

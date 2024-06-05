@@ -32,7 +32,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('login', [AuthController::class, 'showLogin'])->name('login');
 Route::get('auth/login/{person}', [AuthController::class, 'showAdminLogin'])->name('showAdminLogin');
 Route::get('kc/admin/auth/{token}', [KcController::class, 'successfulAdminLogin'])->name('kcAdminAuth');
-Route::get('kc/staff/auth/{token}', [KcController::class, 'successfulStaffLogin'])->name('kcAStaffAuth');
+Route::get('kc/staff/auth/{token}', [KcController::class, 'successfulStaffLogin'])->name('kcStaffAuth');
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
 
@@ -59,6 +59,9 @@ Route::group(['middleware' => 'isStaff'], function(){
     Route::patch('goal/close/{id}', [GoalsController::class, 'closeGoal'])->name('closeGoal');
 
     Route::get('profile', [PlatformController::class, 'profile'])->name('profile');
+    Route::post('profile/basic/update', [StaffController::class, 'updateBasicProfile'])->name('updateBasicProfile');
+    Route::post('profile/ministry/update', [StaffController::class, 'updateMinistryProfile'])->name('updateMinistryProfile');
+    Route::post('profile/marital/update', [StaffController::class, 'updateMaritalProfile'])->name('updateMaritalProfile');
 });
 
 Route::group(['middleware' => 'isAdmin', 'prefix' => 'admin'], function(){

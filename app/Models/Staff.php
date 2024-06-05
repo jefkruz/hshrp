@@ -15,6 +15,20 @@ class Staff extends Model
         return Department::find($this->department_id);
     }
 
+    public function ministry()
+    {
+        return MinistryProfile::where('staff_id', $this->id)->first();
+    }
+
+    public function marital()
+    {
+        return MaritalProfile::where('staff_id', $this->id)->first();
+    }
+
+    public function fullname()
+    {
+        return$this->title. " ". $this->firstname. " ". $this->lastname;
+    }
 
     public function dept()
     {
