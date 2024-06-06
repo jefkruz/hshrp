@@ -25,6 +25,16 @@ class Staff extends Model
         return MaritalProfile::where('staff_id', $this->id)->first();
     }
 
+    public function bank()
+    {
+        return BankProfile::where('staff_id', $this->id)->first();
+    }
+
+    public function parental()
+    {
+        return ParentalProfile::where('staff_id', $this->id)->first();
+    }
+
     public function fullname()
     {
         return$this->title. " ". $this->firstname. " ". $this->lastname;

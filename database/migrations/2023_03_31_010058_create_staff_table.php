@@ -45,6 +45,17 @@ return new class extends Migration
             $table->enum('is_leader', ['yes', 'no'])->default('no');
             $table->string('kc_token')->nullable();
             $table->string('status')->nullable();
+            $table->string('nok1_name')->nullable();
+            $table->string('nok1_phone')->nullable();
+            $table->string('nok1_relationship')->nullable();
+            $table->string('nok2_name')->nullable();
+            $table->string('nok2_phone')->nullable();
+            $table->string('nok2_relationship')->nullable();
+            $table->string('genotype')->nullable();
+            $table->string('blood_group')->nullable();
+            $table->string('allergies')->nullable();
+            $table->string('health_condition')->nullable();
+            $table->string('health_insurance')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

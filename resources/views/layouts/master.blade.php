@@ -130,6 +130,19 @@
                     @if(session('error'))
                     <div class="alert alert-danger">{{session('error')}}</div>
                     @endif
+                        @if($errors->any())
+
+                            <div class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
+
+                                <span class="alert-inner--text">
+                                    @foreach($errors->all()  as $error)
+                                        <li>{{$error}}</li>
+                                    @endforeach
+                                </span>
+
+                            </div>
+
+                        @endif
                     @if(session('message'))
                     <div class="alert alert-primary">{{session('message')}}</div>
                     @endif

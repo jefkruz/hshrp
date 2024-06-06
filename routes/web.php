@@ -62,6 +62,10 @@ Route::group(['middleware' => 'isStaff'], function(){
     Route::post('profile/basic/update', [StaffController::class, 'updateBasicProfile'])->name('updateBasicProfile');
     Route::post('profile/ministry/update', [StaffController::class, 'updateMinistryProfile'])->name('updateMinistryProfile');
     Route::post('profile/marital/update', [StaffController::class, 'updateMaritalProfile'])->name('updateMaritalProfile');
+    Route::post('profile/bank/update', [StaffController::class, 'updateBankProfile'])->name('updateBankProfile');
+    Route::post('profile/nok/update', [StaffController::class, 'updateNokProfile'])->name('updateNokProfile');
+    Route::post('profile/parental/update', [StaffController::class, 'updateParentalProfile'])->name('updateParentalProfile');
+    Route::post('profile/medical/update', [StaffController::class, 'updateMedicalProfile'])->name('updateMedicalProfile');
 });
 
 Route::group(['middleware' => 'isAdmin', 'prefix' => 'admin'], function(){

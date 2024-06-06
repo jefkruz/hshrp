@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BankProfile;
 use App\Models\Department;
 use App\Models\Director;
 use App\Models\Goal;
 use App\Models\MaritalProfile;
 use App\Models\MinistryProfile;
+use App\Models\ParentalProfile;
 use App\Models\Project;
 use App\Models\ProjectTeam;
 use App\Models\Staff;
@@ -236,6 +238,122 @@ class StaffController extends Controller
         $staff->children_school = $request->children_school;
         $staff->save();
         return back()->with('message', 'Marital Status updated successfully.');
+    }
+
+    public function updateBankProfile(Request $request)
+    {
+        $request->validate([
+            'bank_name' =>'required|string',
+            'account_name' =>'required|string',
+            'account_number' =>'required|string',
+            'espees_username' =>'required|string',
+            'espees_wallet' =>'required|string',
+        ]);
+
+        $user = Session::get('staff');
+
+        $exists = BankProfile::where('staff_id', $user->id)->first();
+
+        if ($exists) {
+            $staff = $exists;
+        }
+        else{
+            $staff = new BankProfile();
+        }
+        $staff->staff_id = $user->id;
+        $staff->bank_name = $request->bank_name;
+        $staff->account_name = $request->account_name;
+        $staff->account_number = $request->account_number;
+        $staff->espees_username = $request->espees_username;
+        $staff->espees_wallet = $request->espees_wallet;
+        $staff->save();
+        return back()->with('message', 'Bank Profile updated successfully.');
+
+    }
+
+    public function updateParentalProfile(Request $request)
+    {
+        $request->validate([
+            'parents_alive'=> 'required|string',
+            'parents_born_again'=> 'required|string',
+            'siblings_number'=> 'required|string',
+            'family_position'=> 'required|string',
+
+        ]);
+        $user = Session::get('staff');
+
+        $exists = ParentalProfile::where('staff_id', $user->id)->first();
+
+        if ($exists) {
+            $staff = $exists;
+        }
+        else{
+            $staff = new ParentalProfile();
+        }
+        $staff->staff_id = $user->id;
+        $staff->parents_alive = $request->parents_alive;
+        $staff->parents_born_again = $request->parents_born_again;
+        $staff->ministry_members = $request->ministry_members;
+        $staff->parents_denomination = $request->parents_denomination;
+        $staff->parents_zone = $request->parents_zone;
+        $staff->parents_church = $request->parents_church;
+        $staff->parents_pastor = $request->parents_pastor;
+        $staff->siblings_number = $request->siblings_number;
+        $staff->family_position = $request->family_position;
+        $staff->save();
+        return back()->with('message', 'Parental Profile updated successfully.');
+
+    }
+
+    public function updateNokProfile(Request $request)
+    {
+        $request->validate([
+
+            'nok1_name' =>'required|string',
+            'nok1_phone' =>'required|string',
+            'nok1_relationship' =>'required|string',
+            'nok2_name' =>'required|string',
+            'nok2_phone' =>'required|string',
+            'nok2_relationship' =>'required|string',
+        ]);
+
+        $user = Session::get('staff');
+
+        $staff = Staff::where('id', $user->id)->first();
+        $staff->nok1_name = $request->nok1_name;
+        $staff->nok1_relationship = $request->nok1_relationship;
+        $staff->nok1_phone = $request->nok1_phone;
+        $staff->nok2_name = $request->nok2_name;
+        $staff->nok2_relationship = $request->nok2_relationship;
+        $staff->nok2_phone = $request->nok2_phone;
+        $staff->save();
+        Session::put('staff', $staff);
+        return back()->with('message', 'Next of Kin updated successfully.');
+
+
+    }
+
+    public function updateMedicalProfile(Request $request)
+    {
+        $request->validate([
+            'genotype' =>'required|string',
+            'blood_group' =>'required|string',
+            'allergies' =>'required|string',
+            'health_condition' =>'required|string',
+            'health_insurance' =>'required|string',
+        ]);
+
+        $user = Session::get('staff');
+
+        $staff = Staff::where('id', $user->id)->first();
+        $staff->genotype = $request->genotype;
+        $staff->blood_group = $request->blood_group;
+        $staff->allergies = $request->allergies;
+        $staff->health_condition = $request->health_condition;
+        $staff->health_insurance = $request->health_insurance;
+        $staff->save();
+        Session::put('staff', $staff);
+        return back()->with('message', 'Medical Profile updated successfully.');
     }
 
 }

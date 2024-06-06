@@ -79,8 +79,8 @@
             <div class="col-lg-12 col-md-12 col-sm-12 line-tabs">
                 <ul class="nav nav-tabs nav-tabs-bottom">
                     <li class="nav-item"><a href="#emp_profile" data-toggle="tab" class="nav-link active">Profile</a></li>
-                    <li class="nav-item"><a href="#emp_projects" data-toggle="tab" class="nav-link">Projects</a></li>
-                    <li class="nav-item"><a href="#bank_statutory" data-toggle="tab" class="nav-link">Bank & Statutory <small class="text-danger">(Admin Only)</small></a></li>
+{{--                    <li class="nav-item"><a href="#emp_projects" data-toggle="tab" class="nav-link">Projects</a></li>--}}
+{{--                    <li class="nav-item"><a href="#bank_statutory" data-toggle="tab" class="nav-link">Bank & Statutory <small class="text-danger">(Admin Only)</small></a></li>--}}
                 </ul>
             </div>
         </div>
@@ -202,20 +202,24 @@
 
                             <ul class="personal-info">
                                 <li>
-                                    <div class="title">Bank name</div>
-                                    <div class="text">ICICI Bank</div>
+                                    <div class="title">Ministry Bank Name</div>
+                                    <div class="text">{{$staff->bank()->bank_name ?? 'NILL'}}</div>
                                 </li>
                                 <li>
-                                    <div class="title">Bank account No.</div>
-                                    <div class="text">159843014641</div>
+                                    <div class="title">Ministry  Account Number</div>
+                                    <div class="text">{{$staff->bank()->account_number ?? 'NILL'}}</div>
                                 </li>
                                 <li>
-                                    <div class="title">IFSC Code</div>
-                                    <div class="text">ICI24504</div>
+                                    <div class="title">Ministry Account Name</div>
+                                    <div class="text">{{$staff->bank()->account_name ?? 'NILL'}}</div>
                                 </li>
                                 <li>
-                                    <div class="title">PAN No</div>
-                                    <div class="text">TC000Y56</div>
+                                    <div class="title">Espees Username</div>
+                                    <div class="text">{{$staff->bank()->espees_username ?? 'NILL'}}</div>
+                                </li>
+                                <li>
+                                    <div class="title">Espees Wallet</div>
+                                    <div class="text">{{$staff->bank()->espees_wallet ?? 'NILL'}}</div>
                                 </li>
                             </ul>
                         </div>
@@ -224,36 +228,36 @@
                 <div class="col-md-6 d-flex">
                     <div class="card profile-box flex-fill">
                         <div class="card-body">
-                            <h3 class="card-title">Emergency Contact <a href="#" class="edit-icon" data-toggle="modal" data-target="#emergency_contact_modal"><i class="fa fa-pencil"></i></a></h3>
-                            <h5 class="section-title">Primary</h5>
+                            <h3 class="card-title">Next Of Kin <a href="#" class="edit-icon" data-toggle="modal" data-target="#emergency_contact_modal"><i class="fa fa-pencil"></i></a></h3>
+                            <h5 class="section-title text-primary">Contact One</h5>
                             <ul class="personal-info">
                                 <li>
                                     <div class="title">Name</div>
-                                    <div class="text">John Doe</div>
+                                    <div class="text">{{$staff->nok1_name ?? 'NILL'}}</div>
                                 </li>
                                 <li>
                                     <div class="title">Relationship</div>
-                                    <div class="text">Father</div>
+                                    <div class="text">{{$staff->nok1_relationship ?? 'NILL'}}</div>
                                 </li>
                                 <li>
-                                    <div class="title">Phone </div>
-                                    <div class="text">9876543210, 9876543210</div>
+                                    <div class="title">Phone Number </div>
+                                    <div class="text">{{$staff->nok1_phone ?? 'NILL'}}</div>
                                 </li>
                             </ul>
                             <hr>
-                            <h5 class="section-title">Secondary</h5>
+                            <h5 class="section-title text-primary">Contact Two</h5>
                             <ul class="personal-info">
                                 <li>
                                     <div class="title">Name</div>
-                                    <div class="text">Karen Wills</div>
+                                    <div class="text">{{$staff->nok2_name ?? 'NILL'}}</div>
                                 </li>
                                 <li>
                                     <div class="title">Relationship</div>
-                                    <div class="text">Brother</div>
+                                    <div class="text">{{$staff->nok2_relationship ?? 'NILL'}}</div>
                                 </li>
                                 <li>
                                     <div class="title">Phone </div>
-                                    <div class="text">9876543210, 9876543210</div>
+                                    <div class="text">{{$staff->nok2_phone ?? 'NILL'}}</div>
                                 </li>
                             </ul>
                         </div>
@@ -262,37 +266,79 @@
                 <div class="col-md-6 d-flex">
                     <div class="card profile-box flex-fill">
                         <div class="card-body">
-                            <h3 class="card-title">Family Informations <a href="#" class="edit-icon" data-toggle="modal" data-target="#family_info_modal"><i class="fa fa-pencil"></i></a></h3>
-                            <div class="table-responsive">
-                                <table class="table table-nowrap">
-                                    <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Relationship</th>
-                                        <th>Date of Birth</th>
-                                        <th>Phone</th>
-                                        <th></th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>Leo</td>
-                                        <td>Brother</td>
-                                        <td>Feb 16th, 2019</td>
-                                        <td>9876543210</td>
-                                        <td class="text-right">
-                                            <div class="dropdown dropdown-action">
-                                                <a aria-expanded="false" data-toggle="dropdown" class="action-icon dropdown-toggle" href="#"><i class="material-icons">more_vert</i></a>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a href="#" class="dropdown-item"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                                    <a href="#" class="dropdown-item"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                            <h3 class="card-title">Parent Information <a href="#" class="edit-icon" data-toggle="modal" data-target="#family_info_modal"><i class="fa fa-pencil"></i></a></h3>
+
+                            <ul class="personal-info">
+                                <li>
+                                    <div class="title"> Parents Alive</div>
+                                    <div class="text">{{$staff->parental()->parents_alive ?? 'NILL'}}</div>
+                                </li>
+                                <li>
+                                    <div class="title"> Parents Born Again</div>
+                                    <div class="text">{{$staff->parental()->parents_born_again ?? 'NILL'}}</div>
+                                </li>
+                                <li>
+                                    <div class="title">Ministry Members</div>
+                                    <div class="text">{{$staff->parental()->ministry_members ?? 'NILL'}}</div>
+                                </li>
+                                @if($staff->parental() && $staff->parental()->ministry_members =='No')
+                                <li>
+                                    <div class="title">Parents Denomination</div>
+                                    <div class="text">{{$staff->parental()->parents_denomination ?? 'NILL'}}</div>
+                                </li>
+                                @else
+                                    <li>
+                                        <div class="title">Parents Church</div>
+                                        <div class="text">{{$staff->parental()->parents_church ?? 'NILL'}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Parents Zone</div>
+                                        <div class="text">{{$staff->parental()->parents_zone ?? 'NILL'}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Parents Pastor</div>
+                                        <div class="text">{{$staff->parental()->parents_pastor ?? 'NILL'}}</div>
+                                    </li>
+                                @endif
+                                <li>
+                                    <div class="title">Number of Siblings</div>
+                                    <div class="text">{{$staff->parental()->siblings_number ?? 'NILL'}}</div>
+                                </li>
+                                <li>
+                                    <div class="title">Position in Family</div>
+                                    <div class="text">{{$staff->parental()->family_position?? 'NILL'}}</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 d-flex">
+                    <div class="card profile-box flex-fill">
+                        <div class="card-body">
+                            <h3 class="card-title">Medical Information <a href="#" class="edit-icon" data-toggle="modal" data-target="#medical_info_modal"><i class="fa fa-pencil"></i></a></h3>
+
+                            <ul class="personal-info">
+                                <li>
+                                    <div class="title">Genotype</div>
+                                    <div class="text">{{$staff->genotype ?? 'NILL'}}</div>
+                                </li>
+                                <li>
+                                    <div class="title">Blood Group</div>
+                                    <div class="text">{{$staff->blood_group ?? 'NILL'}}</div>
+                                </li>
+                                <li>
+                                    <div class="title">Allergies</div>
+                                    <div class="text">{{$staff->allergies ?? 'NILL'}}</div>
+                                </li>
+                                <li>
+                                    <div class="title">Health Conditions</div>
+                                    <div class="text">{{$staff->health_conditions ?? 'NILL'}}</div>
+                                </li>
+                                <li>
+                                    <div class="title">Health Insurance</div>
+                                    <div class="text">{{$staff->health_insurance ?? 'NILL'}}</div>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -1026,9 +1072,7 @@
             </div>
         </div>
     </div>
-    <!-- /Profile Modal -->
 
-    <!-- Personal Info Modal -->
     <div id="ministry_info_modal" class="modal custom-modal fade" role="dialog">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
@@ -1151,8 +1195,7 @@
             </div>
         </div>
     </div>
-    <!-- /Personal Info Modal -->
-    <!-- Personal Info Modal -->
+
     <div id="marital_info_modal" class="modal custom-modal fade" role="dialog">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
@@ -1243,88 +1286,109 @@
             </div>
         </div>
     </div>
-    <!-- /Personal Info Modal -->
 
-    <!-- Family Info Modal -->
     <div id="family_info_modal" class="modal custom-modal fade" role="dialog">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title"> Family Informations</h5>
+                    <h5 class="modal-title"> Parental Information</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form>
-                        <div class="form-scroll">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h3 class="card-title">Family Member <a href="javascript:void(0);" class="delete-icon"><i class="fa fa-trash-o"></i></a></h3>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Name <span class="text-danger">*</span></label>
-                                                <input class="form-control" type="text">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Relationship <span class="text-danger">*</span></label>
-                                                <input class="form-control" type="text">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Date of birth <span class="text-danger">*</span></label>
-                                                <input class="form-control" type="text">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Phone <span class="text-danger">*</span></label>
-                                                <input class="form-control" type="text">
-                                            </div>
-                                        </div>
-                                    </div>
+
+                    <form action="{{route('updateParentalProfile')}}" enctype="multipart/form-data" method="POST">
+                        @csrf
+
+
+                        <div class="row">
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Are your Parents Alive?</label>
+                                    <select class=" select form-control"  required name="parents_alive">
+                                        <option>--Select--</option>
+                                        <option  value="Yes" {{ $staff->parental()->parents_alive ?? '' == 'Yes' ? 'selected' : '' }}>Yes</option>
+                                        <option  value="No" {{ $staff->parental()->parents_alive ?? '' == 'No' ? 'selected' : '' }}>No</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Are your Parents Born Again?</label>
+                                    <select class=" select form-control"  id="parentsBornAgain" required name="parents_born_again">
+                                        <option>--Select--</option>
+                                        <option  value="Yes" {{ $staff->parental()->parents_born_again ?? '' == 'Yes' ? 'selected' : '' }}>Yes</option>
+                                        <option  value="No" {{ $staff->parental()->parents_born_againe ?? '' == 'No' ? 'selected' : '' }}>No</option>
+                                    </select>
                                 </div>
                             </div>
 
-                            <div class="card">
-                                <div class="card-body">
-                                    <h3 class="card-title">Education Informations <a href="javascript:void(0);" class="delete-icon"><i class="fa fa-trash-o"></i></a></h3>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Name <span class="text-danger">*</span></label>
-                                                <input class="form-control" type="text">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Relationship <span class="text-danger">*</span></label>
-                                                <input class="form-control" type="text">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Date of birth <span class="text-danger">*</span></label>
-                                                <input class="form-control" type="text">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Phone <span class="text-danger">*</span></label>
-                                                <input class="form-control" type="text">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="add-more">
-                                        <a href="javascript:void(0);"><i class="fa fa-plus-circle"></i> Add More</a>
-                                    </div>
+                            <div class="col-md-6" id="ministryMembersDiv" style="display: none">
+                                <div class="form-group">
+                                    <label>Are they members of the Ministry?</label>
+                                    <select class=" select form-control"  id="ministryMembers"  name="ministry_members">
+                                        <option value="">--Select--</option>
+                                        <option  value="Yes" {{ $staff->parental()->ministry_members ?? '' == 'Yes' ? 'selected' : '' }}>Yes</option>
+                                        <option  value="No" {{ $staff->parental()->ministry_members ?? '' == 'No' ? 'selected' : '' }}>No</option>
+                                    </select>                                </div>
+                            </div>
+                            <div class="col-md-6"  id="parentalDenomination" style="display: none">
+                                <div class="form-group">
+                                    <label>What Denomination</label>
+                                    <input class="form-control"  name="parents_denomination"  value="{{$staff->parental()->parents_denomination ?? ''}}" type="text">
                                 </div>
                             </div>
                         </div>
+                        <div class="row" style="display: none" id="zoneDiv">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Church they attend</label>
+                                    <input type="text" name="parents_church"  value="{{$staff->parental()->parents_church ?? ''}}" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Zone</label>
+                                    <select class=" select form-control"  name="parents_zone">
+                                        <option value="">--Select--</option>
+                                        @foreach($zones as $zone)
+
+                                            <option value="{{ $zone->name }}" {{ $staff->parental()->parents_zone ?? '' == $zone->name ? 'selected' : '' }}>
+                                                {{ $zone->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label> Their Church Pastor</label>
+                                    <input class="form-control"  name="parents_pastor"  value="{{$staff->parental()->parents_pastor ?? ''}}" type="text">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label> Number of Siblings</label>
+                                    <input class="form-control"  name="siblings_number"  required value="{{$staff->parental()->siblings_number ?? ''}}" type="text">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label> Your Position in the Family</label>
+                                    <input class="form-control"  name="family_position"  value="{{$staff->parental()->family_position ?? ''}}" type="text">
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
                         <div class="submit-section">
                             <button class="btn btn-primary submit-btn">Submit</button>
                         </div>
@@ -1333,9 +1397,87 @@
             </div>
         </div>
     </div>
-    <!-- /Family Info Modal -->
 
-    <!-- Family Info Modal -->
+    <div id="medical_info_modal" class="modal custom-modal fade" role="dialog">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"> Medical Information</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <form action="{{route('updateMedicalProfile')}}" enctype="multipart/form-data" method="POST">
+                        @csrf
+
+
+                        <div class="row">
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Genotype</label>
+                                    <select class="select form-control" name="genotype" required>
+                                        <option value="" {{ !$staff->genotype ? 'selected' : '' }}>--Select Genotype--</option>
+                                        <option value="AA" {{ $staff->genotype ?? '' == 'AA' ? 'selected' : '' }}>AA</option>
+                                        <option value="AS" {{ $staff->genotype ?? '' == 'AS' ? 'selected' : '' }}>AS</option>
+                                        <option value="SS" {{ $staff->genotype ?? '' == 'SS' ? 'selected' : '' }}>SS</option>
+                                        <option value="AC" {{ $staff->genotype ?? '' == 'AC' ? 'selected' : '' }}>AC</option>
+                                        <option value="SC" {{ $staff->genotype ?? '' == 'SC' ? 'selected' : '' }}>SC</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Blood Group</label>
+                                    <select class="select form-control" name="blood_group" required>
+                                        <option value="" {{ !$staff->blood_group ? 'selected' : '' }}>--Select Blood Group--</option>
+                                        <option value="A+" {{ $staff->blood_group ?? '' == 'A+' ? 'selected' : '' }}>A+</option>
+                                        <option value="A-" {{ $staff->blood_group ?? '' == 'A-' ? 'selected' : '' }}>A-</option>
+                                        <option value="B+" {{ $staff->blood_group ?? '' == 'B+' ? 'selected' : '' }}>B+</option>
+                                        <option value="B-" {{ $staff->blood_group ?? '' == 'B-' ? 'selected' : '' }}>B-</option>
+                                        <option value="AB+" {{ $staff->blood_group ?? '' == 'AB+' ? 'selected' : '' }}>AB+</option>
+                                        <option value="AB-" {{ $staff->blood_group ?? '' == 'AB-' ? 'selected' : '' }}>AB-</option>
+                                        <option value="O+" {{ $staff->blood_group ?? '' == 'O+' ? 'selected' : '' }}>O+</option>
+                                        <option value="O-" {{ $staff->blood_group ?? '' == 'O-' ? 'selected' : '' }}>O-</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Any Allergies?</label>
+                                    <textarea name="allergies"  rows="3" class="form-control" >{{ $staff->allergies ?? '' }}</textarea>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Any Health Condition</label>
+                                    <textarea name="health_condition"  rows="3" class="form-control" >{{ $staff->health_condition ?? '' }}</textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Do you have health insurance</label>
+                                    <input class="form-control"  name="health_insurance" value="{{$staff->health_insurance ?? ''}}" type="text">
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+
+                        <div class="submit-section">
+                            <button class="btn btn-primary submit-btn">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div id="bank_info_modal" class="modal custom-modal fade" role="dialog">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
@@ -1347,7 +1489,7 @@
                 </div>
                 <div class="modal-body">
 
-                    <form action="{{route('updateMaritalProfile')}}" enctype="multipart/form-data" method="POST">
+                    <form action="{{route('updateBankProfile')}}" enctype="multipart/form-data" method="POST">
                         @csrf
 
 
@@ -1368,7 +1510,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Ministry Bank Account Name</label>
-                                        <input class="form-control"  name="account_name"  value="{{$staff->bank()->account_name ?? ''}}" type="email">
+                                        <input class="form-control"  name="account_name"  value="{{$staff->bank()->account_name ?? ''}}" type="text">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -1377,7 +1519,7 @@
                                         <input class="form-control"  name="espees_username"  value="{{$staff->bank()->espees_username ?? ''}}" type="text">
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Espees Wallet Address</label>
                                         <input class="form-control"  name="espees_wallet" value="{{$staff->bank()->espees_wallet ?? ''}}" type="text">
@@ -1404,73 +1546,67 @@
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Personal Information</h5>
+                    <h5 class="modal-title">Next of Kin Information</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form action="{{route('updateNokProfile')}}" enctype="multipart/form-data" method="POST">
+                        @csrf
                         <div class="card">
                             <div class="card-body">
-                                <h3 class="card-title">Primary Contact</h3>
+                                <h3 class="card-title">Contact One</h3>
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
-                                            <label>Name <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control">
+                                            <label> Full Name <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" name="nok1_name" required  value="{{$staff->nok1_name}}">
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Relationship <span class="text-danger">*</span></label>
-                                            <input class="form-control" type="text">
+                                            <input type="text" class="form-control" name="nok1_relationship" required  value="{{$staff->nok1_relationship}}">
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Phone <span class="text-danger">*</span></label>
-                                            <input class="form-control" type="text">
+                                            <input type="text" class="form-control" name="nok1_phone" required  value="{{$staff->nok1_phone}}">
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Phone 2</label>
-                                            <input class="form-control" type="text">
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
 
                         <div class="card">
                             <div class="card-body">
-                                <h3 class="card-title">Primary Contact</h3>
+                                <h3 class="card-title">Contact two</h3>
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
-                                            <label>Name <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control">
+                                            <label>Full Name <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" name="nok2_name" required  value="{{$staff->nok2_name}}">
+
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Relationship <span class="text-danger">*</span></label>
-                                            <input class="form-control" type="text">
+                                            <input type="text" class="form-control" name="nok2_relationship" required  value="{{$staff->nok2_relationship}}">
+
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Phone <span class="text-danger">*</span></label>
-                                            <input class="form-control" type="text">
+                                            <input type="text" class="form-control" name="nok2_phone" required value="{{$staff->nok2_phone}}">
+
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Phone 2</label>
-                                            <input class="form-control" type="text">
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -1729,6 +1865,33 @@
 
                 } else if (mode === 'Single') {
                     $('#marriedInfo').hide();
+
+                }
+            });
+            $('#parentsBornAgain').change(function() {
+                var set = $(this).val();
+                if (set === 'Yes') {
+                    $('#ministryMembersDiv').show();
+                    $('#parentalDenomination').hide();
+                    $('#zoneDiv').hide();
+
+                } else if (set === 'No') {
+                    $('#ministryMembersDiv').hide();
+                    $('#parentalDenomination').hide();
+                    $('#zoneDiv').hide();
+
+                }
+            });
+            $('#ministryMembers').change(function() {
+                var members = $(this).val();
+                if (members === 'Yes') {
+                    $('#parentalDenomination').hide();
+                    $('#zoneDiv').show();
+
+                } else if (members === 'No') {
+
+                    $('#parentalDenomination').show();
+                    $('#zoneDiv').hide();
 
                 }
             });
