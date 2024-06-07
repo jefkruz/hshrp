@@ -10,6 +10,8 @@ class Staff extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $guarded;
+
     public function department()
     {
         return Department::find($this->department_id);
@@ -33,6 +35,15 @@ class Staff extends Model
     public function parental()
     {
         return ParentalProfile::where('staff_id', $this->id)->first();
+    }
+    public function work()
+    {
+        return ExperienceProfile::where('staff_id', $this->id)->first();
+    }
+
+    public function academicProfiles()
+    {
+        return $this->hasMany(AcademicProfile::class);
     }
 
     public function fullname()

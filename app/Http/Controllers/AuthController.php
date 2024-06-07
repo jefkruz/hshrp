@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Admin;
 use App\Models\Director;
+use App\Models\Feedback;
 use App\Models\Staff;
 use Illuminate\Http\Request;
 
@@ -135,6 +136,37 @@ class AuthController extends Controller
         session()->put('staff', $member);
         return redirect()->route('dashboard');
 
+    }
+
+    public function showFeedback()
+    {
+
+        return view('feedback');
+    }
+
+    public function submitFeedback(Request $request)
+    {
+        $request->validate([
+            'name' =>'required',
+            'department' =>'required',
+            'username' =>'required',
+            'changes' =>'required',
+            'message' =>'required',
+            'result' =>'required'
+        ]);
+        $existing = Feedback::where('username', $request->username)->first();
+        if ($existing) {
+            return back()->with('error', 'You have already submitted feedback');
+        }
+        $feedback = new Feedback();
+        $feedback->name = $request->name;
+        $feedback->username = $request->username;
+        $feedback->department = $request->department;
+        $feedback->changes = $request->changes;
+        $feedback->message = $request->message;
+        $feedback->result = $request->result;
+        $feedback->save();
+        return back()->with('message', 'Thank you for your feedback');
     }
 
     public function logout()

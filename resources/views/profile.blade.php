@@ -350,30 +350,21 @@
                             <h3 class="card-title">Education Informations <a href="#" class="edit-icon" data-toggle="modal" data-target="#education_info"><i class="fa fa-pencil"></i></a></h3>
                             <div class="experience-box">
                                 <ul class="experience-list">
+                                    @foreach ($staff->academicProfiles as $academic)
                                     <li>
                                         <div class="experience-user">
                                             <div class="before-circle"></div>
                                         </div>
                                         <div class="experience-content">
                                             <div class="timeline-content">
-                                                <a href="#/" class="name">International College of Arts and Science (UG)</a>
-                                                <div>Bsc Computer Science</div>
-                                                <span class="time">2000 - 2003</span>
+                                                <a href="#" class="name">{{ ucwords($academic->institution) }}</a>
+                                                <div>{{ucwords($academic->degree)  }} in {{ ucwords($academic->subject )}}</div>
+                                                <span class="time">{{ \Carbon\Carbon::parse($academic->start_date)->format('Y') }} - {{ \Carbon\Carbon::parse($academic->complete_date)->format('Y') }}</span>
                                             </div>
                                         </div>
                                     </li>
-                                    <li>
-                                        <div class="experience-user">
-                                            <div class="before-circle"></div>
-                                        </div>
-                                        <div class="experience-content">
-                                            <div class="timeline-content">
-                                                <a href="#/" class="name">International College of Arts and Science (PG)</a>
-                                                <div>Msc Computer Science</div>
-                                                <span class="time">2000 - 2003</span>
-                                            </div>
-                                        </div>
-                                    </li>
+                                    @endforeach
+
                                 </ul>
                             </div>
                         </div>
@@ -382,7 +373,7 @@
                 <div class="col-md-6 d-flex">
                     <div class="card profile-box flex-fill">
                         <div class="card-body">
-                            <h3 class="card-title">Experience <a href="#" class="edit-icon" data-toggle="modal" data-target="#experience_info"><i class="fa fa-pencil"></i></a></h3>
+                            <h3 class="card-title">Ministry Work Experience <a href="#" class="edit-icon" data-toggle="modal" data-target="#experience_info"><i class="fa fa-pencil"></i></a></h3>
                             <div class="experience-box">
                                 <ul class="experience-list">
                                     <li>
@@ -990,7 +981,7 @@
                                         <div class="form-group">
                                             <label>Birth Date</label>
                                             <div class="cal-icon">
-                                                <input class="form-control datetimepicker" required   name="dob" type="text" value="{{ \Carbon\Carbon::parse(session('staff')->dob)->format('Y-m-d') }}">
+                                                <input class="form-control mydatetimepicker" required   name="dob" type="text" value="{{ \Carbon\Carbon::parse(session('staff')->dob)->format('Y-m-d') }}">
                                             </div>
                                         </div>
                                     </div>
@@ -1630,113 +1621,124 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-scroll">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h3 class="card-title">Education Informations <a href="javascript:void(0);" class="delete-icon"><i class="fa fa-trash-o"></i></a></h3>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group form-focus focused">
-                                                <input type="text" value="Oxford University" class="form-control floating">
-                                                <label class="focus-label">Institution</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group form-focus focused">
-                                                <input type="text" value="Computer Science" class="form-control floating">
-                                                <label class="focus-label">Subject</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group form-focus focused">
-                                                <div class="cal-icon">
-                                                    <input type="text" value="01/06/2002" class="form-control floating datetimepicker">
+
+                    <div class="modal-body">
+                        <form id="educationForm" action="{{ route('updateEducationProfile') }}" method="POST">
+                            @csrf
+
+                            <div id="educationContainer">
+                                @if (!empty($staff->academic))
+                                    @foreach ($staff->academic as $academic)
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h3 class="card-title">Education Information <a href="#" class="delete-icon"><i class="fa fa-trash-o"></i></a></h3>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group form-focus focused">
+                                                            <input type="text" class="form-control floating" name="institution[]" value="{{ $academic->institution }}">
+                                                            <label class="focus-label">Institution</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group form-focus focused">
+                                                            <input type="text" class="form-control floating" name="subject[]" value="{{ $academic->subject }}">
+                                                            <label class="focus-label">Course</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group form-focus focused">
+                                                            <div class="cal-icon">
+                                                                <input type="text" class="form-control floating datetimepicker" name="start_date[]"   value="{{ $academic->start_date }}" readonly>
+                                                            </div>
+                                                            <label class="focus-label">Starting Date</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group form-focus focused">
+                                                            <div class="cal-icon">
+                                                                <input type="text" class="form-control floating datetimepicker" name="complete_date[]" value="{{ $academic->complete_date }}">
+                                                            </div>
+                                                            <label class="focus-label">Complete Date</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group form-focus focused">
+                                                            <input type="text" class="form-control floating" name="degree[]" value="{{ $academic->degree }}">
+                                                            <label class="focus-label">Degree</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group form-focus focused">
+                                                            <input type="text" class="form-control floating" name="grade[]" value="{{ $academic->grade }}">
+                                                            <label class="focus-label">Grade</label>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <label class="focus-label">Starting Date</label>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group form-focus focused">
-                                                <div class="cal-icon">
-                                                    <input type="text" value="31/05/2006" class="form-control floating datetimepicker">
+                                    @endforeach
+                                @else
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h3 class="card-title">Education Information <a href="#" class="delete-icon"><i class="fa fa-trash-o"></i></a></h3>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group form-focus focused">
+                                                        <input type="text" class="form-control floating" name="institution[]">
+                                                        <label class="focus-label">Institution</label>
+                                                    </div>
                                                 </div>
-                                                <label class="focus-label">Complete Date</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group form-focus focused">
-                                                <input type="text" value="BE Computer Science" class="form-control floating">
-                                                <label class="focus-label">Degree</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group form-focus focused">
-                                                <input type="text" value="Grade A" class="form-control floating">
-                                                <label class="focus-label">Grade</label>
+                                                <div class="col-md-6">
+                                                    <div class="form-group form-focus focused">
+                                                        <input type="text" class="form-control floating" name="subject[]">
+                                                        <label class="focus-label">Course</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group form-focus focused">
+                                                        <div class="cal-icon">
+                                                            <input type="text" class="form-control floating mydatetimepicker" name="start_date[]">
+                                                        </div>
+                                                        <label class="focus-label">Starting Date</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group form-focus focused">
+                                                        <div class="cal-icon">
+                                                            <input type="text" class="form-control floating mydatetimepicker" name="complete_date[]">
+                                                        </div>
+                                                        <label class="focus-label">Complete Date</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group form-focus focused">
+                                                        <input type="text" class="form-control floating" name="degree[]">
+                                                        <label class="focus-label">Degree</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group form-focus focused">
+                                                        <input type="text" class="form-control floating" name="grade[]">
+                                                        <label class="focus-label">Grade</label>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
+                                @endif
+                                <div class="add-more">
+                                    <a href="#" id="addMore"><i class="fa fa-plus-circle"></i> Add More</a>
                                 </div>
                             </div>
 
-                            <div class="card">
-                                <div class="card-body">
-                                    <h3 class="card-title">Education Informations <a href="javascript:void(0);" class="delete-icon"><i class="fa fa-trash-o"></i></a></h3>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group form-focus focused">
-                                                <input type="text" value="Oxford University" class="form-control floating">
-                                                <label class="focus-label">Institution</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group form-focus focused">
-                                                <input type="text" value="Computer Science" class="form-control floating">
-                                                <label class="focus-label">Subject</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group form-focus focused">
-                                                <div class="cal-icon">
-                                                    <input type="text" value="01/06/2002" class="form-control floating datetimepicker">
-                                                </div>
-                                                <label class="focus-label">Starting Date</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group form-focus focused">
-                                                <div class="cal-icon">
-                                                    <input type="text" value="31/05/2006" class="form-control floating datetimepicker">
-                                                </div>
-                                                <label class="focus-label">Complete Date</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group form-focus focused">
-                                                <input type="text" value="BE Computer Science" class="form-control floating">
-                                                <label class="focus-label">Degree</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group form-focus focused">
-                                                <input type="text" value="Grade A" class="form-control floating">
-                                                <label class="focus-label">Grade</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="add-more">
-                                        <a href="javascript:void(0);"><i class="fa fa-plus-circle"></i> Add More</a>
-                                    </div>
-                                </div>
+
+                            <div class="submit-section">
+                                <button class="btn btn-primary submit-btn">Submit</button>
                             </div>
-                        </div>
-                        <div class="submit-section">
-                            <button class="btn btn-primary submit-btn">Submit</button>
-                        </div>
-                    </form>
-                </div>
+                        </form>
+                    </div>
+
+
             </div>
         </div>
     </div>
@@ -1747,98 +1749,88 @@
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Experience Informations</h5>
+                    <h5 class="modal-title">Work Information</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form>
-                        <div class="form-scroll">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h3 class="card-title">Experience Informations <a href="javascript:void(0);" class="delete-icon"><i class="fa fa-trash-o"></i></a></h3>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group form-focus">
-                                                <input type="text" class="form-control floating" value="Digital Devlopment Inc">
-                                                <label class="focus-label">Company Name</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group form-focus">
-                                                <input type="text" class="form-control floating" value="United States">
-                                                <label class="focus-label">Location</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group form-focus">
-                                                <input type="text" class="form-control floating" value="Web Developer">
-                                                <label class="focus-label">Job Position</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group form-focus">
-                                                <div class="cal-icon">
-                                                    <input type="text" class="form-control floating datetimepicker" value="01/07/2007">
-                                                </div>
-                                                <label class="focus-label">Period From</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group form-focus">
-                                                <div class="cal-icon">
-                                                    <input type="text" class="form-control floating datetimepicker" value="08/06/2018">
-                                                </div>
-                                                <label class="focus-label">Period To</label>
-                                            </div>
+                    <form action="{{route('updateNokProfile')}}" enctype="multipart/form-data" method="POST">
+                        @csrf
+                        <div class="card">
+                            <div class="card-body">
+                                <h3 class="card-title">Work Experience in Ministry</h3>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Do you have any work experience in the Loveworld nation</label>
+                                            <select class=" select form-control"  id="workExperience" required name="experience">
+                                                <option>--Select--</option>
+                                                <option  value="Yes" {{ $staff->work()->experience ?? '' == 'Yes' ? 'selected' : '' }}>Yes</option>
+                                                <option  value="No" {{ $staff->work()->experiencee ?? '' == 'No' ? 'selected' : '' }}>No</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                                <div class="row" id="showWork">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>From <span class="text-danger">*</span></label>
+                                            <div class="cal-icon">
+                                                <input type="text" class="form-control floating mydatetimepicker" name="start_date"   value="{{$staff->work()->ministry_start_date ??''}}" >
+                                            </div>
+                                        </div>
 
-                            <div class="card">
-                                <div class="card-body">
-                                    <h3 class="card-title">Experience Informations <a href="javascript:void(0);" class="delete-icon"><i class="fa fa-trash-o"></i></a></h3>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group form-focus">
-                                                <input type="text" class="form-control floating" value="Digital Devlopment Inc">
-                                                <label class="focus-label">Company Name</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group form-focus">
-                                                <input type="text" class="form-control floating" value="United States">
-                                                <label class="focus-label">Location</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group form-focus">
-                                                <input type="text" class="form-control floating" value="Web Developer">
-                                                <label class="focus-label">Job Position</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group form-focus">
-                                                <div class="cal-icon">
-                                                    <input type="text" class="form-control floating datetimepicker" value="01/07/2007">
-                                                </div>
-                                                <label class="focus-label">Period From</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group form-focus">
-                                                <div class="cal-icon">
-                                                    <input type="text" class="form-control floating datetimepicker" value="08/06/2018">
-                                                </div>
-                                                <label class="focus-label">Period To</label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Too <span class="text-danger">*</span></label>
+                                            <div class="cal-icon">
+                                                <input type="text" class="form-control floating mydatetimepicker" name="end_date"   value="{{$staff->work()->ministry_end_date ?? ''}}" >
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="add-more">
-                                        <a href="javascript:void(0);"><i class="fa fa-plus-circle"></i> Add More</a>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Job Role <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" name="job_role" required value="{{$staff->work()->ministry_job_role ?? ''}}">
+
+                                        </div>
                                     </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-body">
+                                <h3 class="card-title">Work History in Healing School</h3>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>From <span class="text-danger">*</span></label>
+                                            <div class="cal-icon">
+                                            <input type="text" class="form-control floating mydatetimepicker" name="start_date"   value="{{$staff->work()->start_date ??''}}" >
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Too <span class="text-danger">*</span></label>
+                                            <div class="cal-icon">
+                                            <input type="text" class="form-control floating mydatetimepicker" name="end_date"   value="{{$staff->work()->end_date ?? ''}}" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Job Role <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" name="job_role" required value="{{$staff->work()->job_role ?? ''}}">
+
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -1897,4 +1889,103 @@
             });
         });
         </script>
+    <script>
+        $(document).ready(function() {
+            // Function to initialize datepicker
+            function initializeDatepicker() {
+                $('.mydatetimepicker').datetimepicker({
+                    format: 'YYYY-MM-DD',
+                    useCurrent: false,  // Allow any date, including past dates
+                    allowInputToggle: true,  // Allow manual input (but we handle this with readonly)
+                    showClear: true,  // Show clear button
+                    showClose: true,  // Show close button
+                    showTodayButton: true,  // Show "Today" button
+                    widgetPositioning: {
+                        horizontal: 'auto',
+                        vertical: 'bottom'
+                    }
+                // Prevent manual input
+
+                });
+            }
+
+            // Function to add a new education card
+            $('#educationContainer').on('click', '#addMore', function(e) {
+                e.preventDefault();
+                var newCard = `
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title">Education Information <a href="javascript:void(0);" class="delete-icon"><i class="fa fa-trash-o"></i></a></h3>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group form-focus focused">
+                                    <input type="text" class="form-control floating" name="institution[]">
+                                    <label class="focus-label">Institution</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-focus focused">
+                                    <input type="text" class="form-control floating" name="subject[]">
+                                    <label class="focus-label">Course</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-focus focused">
+                                    <div class="cal-icon">
+                                        <input type="text" class="form-control floating mydatetimepicker" name="start_date[]">
+                                    </div>
+                                    <label class="focus-label">Starting Date</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-focus focused">
+                                    <div class="cal-icon">
+                                        <input type="text" class="form-control floating mydatetimepicker" name="complete_date[]">
+                                    </div>
+                                    <label class="focus-label">Complete Date</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-focus focused">
+                                    <input type="text" class="form-control floating" name="degree[]">
+                                    <label class="focus-label">Degree</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-focus focused">
+                                    <input type="text" class="form-control floating" name="grade[]">
+                                    <label class="focus-label">Grade</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+                $('#educationContainer').append(newCard);
+                initializeDatepicker();
+                // Remove previous "Add More" link to ensure only one exists
+                $('#educationContainer .add-more').remove();
+                // Append "Add More" link to the last card
+                $('#educationContainer .card:last').find('.card-body').append('<div class="add-more"><a href="#" id="addMore"><i class="fa fa-plus-circle"></i> Add More</a></div>');
+            });
+
+            // Function to delete an education card
+            $('#educationContainer').on('click', '.delete-icon', function(e) {
+                e.preventDefault();
+                $(this).closest('.card').remove();
+
+                // Append "Add More" link to the last card if it doesn't have one
+                if ($('#educationContainer .card').length === 1) {
+                    $('#educationContainer .card:last').find('.card-body').append('<div class="add-more"><a href="#" id="addMore"><i class="fa fa-plus-circle"></i> Add More</a></div>');
+                }
+            });
+
+            // Initialize datepicker on page load
+            initializeDatepicker();
+        });
+    </script>
+
+
+
+
+
 @endsection

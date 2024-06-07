@@ -35,6 +35,8 @@ Route::get('kc/admin/auth/{token}', [KcController::class, 'successfulAdminLogin'
 Route::get('kc/staff/auth/{token}', [KcController::class, 'successfulStaffLogin'])->name('kcStaffAuth');
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
+Route::get('feedback', [AuthController::class, 'showFeedback'])->name('feedback');
+Route::post('feedback', [AuthController::class, 'submitFeedback']);
 
 
 
@@ -66,6 +68,7 @@ Route::group(['middleware' => 'isStaff'], function(){
     Route::post('profile/nok/update', [StaffController::class, 'updateNokProfile'])->name('updateNokProfile');
     Route::post('profile/parental/update', [StaffController::class, 'updateParentalProfile'])->name('updateParentalProfile');
     Route::post('profile/medical/update', [StaffController::class, 'updateMedicalProfile'])->name('updateMedicalProfile');
+    Route::post('profile/education/update', [StaffController::class, 'updateEducationProfile'])->name('updateEducationProfile');
 });
 
 Route::group(['middleware' => 'isAdmin', 'prefix' => 'admin'], function(){

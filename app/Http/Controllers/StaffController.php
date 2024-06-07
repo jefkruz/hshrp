@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AcademicProfile;
 use App\Models\BankProfile;
 use App\Models\Department;
 use App\Models\Director;
@@ -354,6 +355,44 @@ class StaffController extends Controller
         $staff->save();
         Session::put('staff', $staff);
         return back()->with('message', 'Medical Profile updated successfully.');
+    }
+
+    public function updateEducationProfile(Request $request)
+    {
+
+        // Validate the request
+        $request->validate([
+            'institution.*' => 'required|string|max:255',
+            'subject.*' => 'required|string|max:255',
+            'start_date.*' => 'required|date',
+            'complete_date.*' => 'required|date',
+            'degree.*' => 'required|string|max:255',
+            'grade.*' => 'nullable|string|max:255',
+        ]);
+
+
+        // Assuming you have a user or staff model where you save this data
+        $user = Session::get('staff');
+        // Find the staff member
+        $staff = Staff::findOrFail($user->id);
+
+        // Clear the existing academic profiles
+        $staff->academicProfiles()->delete();
+
+        // Save each education detail
+        foreach ($request->institution as $key => $value) {
+            AcademicProfile::create([
+                'staff_id' => $staff->id,
+                'institution' => $value,
+                'subject' => $request->subject[$key],
+                'start_date' => $request->start_date[$key],
+                'complete_date' => $request->complete_date[$key],
+                'degree' => $request->degree[$key],
+                'grade' => $request->grade[$key] ?? null,  // Handle optional grade
+            ]);
+        }
+
+        return redirect()->back()->with('message', 'Education profile updated successfully!');
     }
 
 }
