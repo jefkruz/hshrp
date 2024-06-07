@@ -59,7 +59,11 @@
                                                     </div>
                                                 </div>
                                                 <a href="#">
-                                                    {{$superior ?? ''}}</div>
+                                                    @if($superior)
+                                                    {{$superior->fullname() }}
+                                                    @else
+                                                        NILL
+                                                    @endif
                                                 </a>
                                             </div>
                                         </li>
