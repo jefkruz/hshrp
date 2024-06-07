@@ -55,11 +55,11 @@
                                             <div class="text">
                                                 <div class="avatar-box">
                                                     <div class="avatar avatar-xs">
-                                                        <img src="{{$superior->profile_pic}}" alt="">
+                                                        <img src="{{$superior->profile_pic ?? ''}}" alt="">
                                                     </div>
                                                 </div>
                                                 <a href="#">
-                                                    {{$superior->fullname()}}</div>
+                                                    {{$superior->fullname() ?? ''}}</div>
                                                 </a>
                                             </div>
                                         </li>
