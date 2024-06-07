@@ -96,7 +96,7 @@
                             <input class="form-control" name="department" required type="text">
                         </div>
                         <div class="form-group">
-                            <label>Appreciation Message</label>
+                            <label>Appreciation Message to the Director</label>
                             <textarea class="form-control" rows="5" cols="5" name="message" ></textarea>
 
                         </div>
