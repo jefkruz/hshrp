@@ -40,7 +40,11 @@
                                         </li>
                                         <li>
                                             <div class="title">Birthday:</div>
-                                            <div class="text">{{ \Carbon\Carbon::parse(session('staff')->dob)->format('j F Y') ?? 'NULL'}}</div>
+                                            <div class="text">
+                                                {{ session('staff')->dob ? \Carbon\Carbon::createFromFormat('d/m/Y', session('staff')->dob)->format('jS F Y') : 'NILL' }}
+
+
+                                            </div>
                                         </li>
                                         <li>
                                             <div class="title">Address:</div>
@@ -982,19 +986,13 @@
                                     </div>
                                     <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Date</label>
-                                        <input type="text" id="date" name="dob" class="form-control">
-                                        <span class="form-text text-muted">dd/mm/yyyy</span>
+                                        <label>Date of Birth <span class="text-danger"> (dd/mm/yyyy)</span></label>
+                                        <input type="text" id="date" name="dob"  placeholder="{{ session('staff')->dob ? \Carbon\Carbon::createFromFormat('d/m/Y', session('staff')->dob)->format('jS F Y') : '' }}
+                                            " class="form-control">
+
                                     </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Birth Date</label>
-                                            <div class="cal-icon">
-                                                <input class="form-control mydatetimepicker" required   name="dob" type="text" value="{{ \Carbon\Carbon::parse(session('staff')->dob)->format('Y-m-d') }}">
-                                            </div>
-                                        </div>
-                                    </div>
+
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Gender</label>
