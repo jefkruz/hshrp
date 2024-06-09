@@ -27,6 +27,7 @@
     <!-- Datetimepicker CSS -->
     <link rel="stylesheet" href="{{url('assets/css/bootstrap-datetimepicker.min.css')}}">
 
+
     <!-- Main CSS -->
     <link rel="stylesheet" href="{{url('assets/css/style.css')}}">
 
@@ -168,6 +169,10 @@
 <!-- Bootstrap Core JS -->
 <script src="{{url('assets/js/popper.min.js')}}"></script>
 <script src="{{url('assets/js/bootstrap.min.js')}}"></script>
+
+<!-- Mask JS -->
+<script src="{{url('assets/js/jquery.maskedinput.min.js')}}"></script>
+<script src="{{url('assets/js/mask.js')}}"></script>
 
 <!-- Select2 JS -->
 <script src="{{url('assets/js/select2.min.js')}}"></script>

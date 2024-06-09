@@ -5,7 +5,7 @@
     @include('partials.breadcrumb')
 
     <div class="row">
-        <div class="col-md-8 offset-md-2">
+        <div class="col-md-10">
             <div class="card">
                 <div class="card-body">
                     <div class="row">

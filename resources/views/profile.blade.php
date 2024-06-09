@@ -980,7 +980,13 @@
                                             <input type="text" class="form-control" name="portal_id"  placeholder="Enter Portal ID" value="{{session('staff')->portal_id}}">
                                         </div>
                                     </div>
-
+                                    <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Date</label>
+                                        <input type="text" id="date" name="dob" class="form-control">
+                                        <span class="form-text text-muted">dd/mm/yyyy</span>
+                                    </div>
+                                    </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Birth Date</label>
@@ -1036,19 +1042,19 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Height</label>
-                                    <input type="text" class="form-control" required  placeholder="Enter Height" name="height" value="{{session('staff')->height}}">
+                                    <input type="text" class="form-control" required  placeholder="In Meters" name="height" value="{{session('staff')->height}}">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Weight</label>
-                                    <input type="text" class="form-control"  required placeholder="Enter Weight" name="weight" value="{{session('staff')->weight}}">
+                                    <input type="text" class="form-control"  required placeholder="in KG" name="weight" value="{{session('staff')->weight}}">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Shirt Size</label>
-                                    <input type="text" class="form-control"  required placeholder="Enter Shirt Size" name="shirt_size" value="{{session('staff')->shirt_size}}">
+                                    <input type="text" class="form-control"  required placeholder="American/British Size" name="shirt_size" value="{{session('staff')->shirt_size}}">
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -1211,6 +1217,9 @@
                                     <select class=" select form-control" id="status" required name="marital_status">
                                         <option  value="Single" {{ $staff->marital()->marital_status ?? '' == 'Single' ? 'selected' : '' }}>Single</option>
                                         <option  value="Married" {{ $staff->marital()->marital_status ?? '' == 'Married' ? 'selected' : '' }}>Married</option>
+                                        <option  value="Separated" {{ $staff->marital()->marital_status ?? '' == 'Separated' ? 'selected' : '' }}>Separated</option>
+                                        <option  value="Divorced" {{ $staff->marital()->marital_status ?? '' == 'Divorced' ? 'selected' : '' }}>Divorced</option>
+                                        <option  value="Widow" {{ $staff->marital()->marital_status ?? '' == 'Widow' ? 'selected' : '' }}>Widow(er)</option>
                                     </select>
                                 </div>
                             </div>
