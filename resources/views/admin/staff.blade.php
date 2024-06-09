@@ -102,7 +102,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="">Official Email</label>
-                                    <input type="text" class="form-control" name="email" placeholder="Official Email" required>
+                                    <input type="text" class="form-control" name="email" placeholder="Official Email" >
                                 </div>
                             </div>
 

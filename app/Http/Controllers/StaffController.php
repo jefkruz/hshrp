@@ -62,7 +62,6 @@ class StaffController extends Controller
             'username' => 'required',
             'firstname' => 'required',
             'lastname' => 'required',
-            'email' => 'required',
             'department_id' => 'required',
         ]);
 

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('department_id');
             $table->integer('role_id')->nullable();
-            $table->integer('portal_id')->nullable();
+            $table->string('portal_id')->nullable();
             $table->string('title')->nullable();
             $table->string('username')->nullable();
             $table->string('firstname')->nullable();
