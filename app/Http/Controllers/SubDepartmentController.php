@@ -120,13 +120,18 @@ class SubDepartmentController extends Controller
 
         $dept->save();
 
-        $staff = Staff::where('id',$subDepartment->hod_id)->first();
-        $staff->is_hod = 'no';
-        $staff->save();
+        $staff = Staff::where('id',$subDepartment->hod_id)->where('is_hod','yes')->first();
 
-        $staff = Staff::where('id',$request->hod_id)->first();
-        $staff->is_hod = 'yes';
-        $staff->save();
+        if ($staff) {
+            $staff->is_hod = 'no';
+            $staff->save();
+        }
+
+
+        $hod = Staff::where('id',$request->hod_id)->first();
+
+        $hod->is_hod = 'yes';
+        $hod->save();
 
         return redirect()->route('sub-departments.index')
             ->with('message', 'SubDepartment updated successfully');
