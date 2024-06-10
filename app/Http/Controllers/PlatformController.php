@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Appraisal;
 use App\Models\AppraisalAttribute;
 use App\Models\Country;
+use App\Models\Department;
+use App\Models\Director;
 use App\Models\Goal;
 use App\Models\MinistryProfile;
 use App\Models\Project;
@@ -151,15 +153,20 @@ class PlatformController extends Controller
     public function profile()
     {
         $staff = Session::get('staff');
-        $s = new StaffController();
+
         $m = new MenuController();
-        $profile = $s->getProfile($staff);
+
+        $department = Department::find($staff->department_id);
+        if($staff->is_leader == 'yes'){
+            $data['superior']  = Director::first();
+        } else {
+            $data['superior']  = Staff::find($department->leader_id);
+        }
         $data['page_title'] = 'Profile';
         $data['countries'] = Country::all();
         $data['zones'] = Zone::all();
-        $data['is_leader'] = $profile['is_leader'];
-        $data['department'] = $profile['department'];
-        $data['superior'] = $profile['superior'];
+        $data['is_leader'] = $staff->is_leader;
+        $data['department'] = $department;
         $data['staff'] = $staff;
         $data['menu'] = $m->fetchMenu();
         return view('profile', $data);

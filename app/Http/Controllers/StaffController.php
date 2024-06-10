@@ -390,15 +390,15 @@ class StaffController extends Controller
                 'grade' => $request->grade[$key] ?? null,  // Handle optional grade
             ]);
         }
-//        // Retrieve the latest data from the database
-//        $updatedStaff = Staff::with('academicProfiles')->findOrFail($user->id);
-//
-//        // Merge the existing staff data with the updated education profile data
-//        $mergedData = $user->toArray();
-//        $mergedData['academicProfiles'] = $updatedStaff->academicProfiles;
-//
-//        // Update the session with the merged data
-//        Session::put('staff', $mergedData);
+        // Retrieve the latest data from the database
+        $updatedStaff = Staff::with('academicProfiles')->findOrFail($user->id);
+
+        // Merge the existing staff data with the updated education profile data
+        $mergedData = $user->toArray();
+        $mergedData['academicProfiles'] = $updatedStaff->academicProfiles;
+
+        // Update the session with the merged data
+        Session::put('staff', $mergedData);
 
         return redirect()->back()->with('message', 'Education profile updated successfully!');
     }

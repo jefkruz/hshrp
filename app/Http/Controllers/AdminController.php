@@ -127,6 +127,13 @@ class AdminController extends Controller
         return view('admin.view_staff', $data);
     }
 
+    public function staffDelete($id)
+    {
+        $staff = Staff::findOrFail($id);
+        $staff->delete();
+        return back()->with('message', 'Staff deleted');
+    }
+
     public function viewGoal($id)
     {
         $m = new MenuController();
