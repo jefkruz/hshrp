@@ -162,7 +162,9 @@
                                     <div class="title">Anniversary Date</div>
                                     <div class="text">
                                         @if($staff->marital() && $staff->marital()->martial_status == 'Married' )
-                                            {{ \Carbon\Carbon::parse($staff->marital()->anniversary )->format('j F Y') }}
+                                            {{ $staff->marital()->anniversary ? \Carbon\Carbon::createFromFormat('d/m/Y', $staff->marital()->anniversary)->format('jS F Y') : 'NILL' }}
+
+{{--                                            {{ \Carbon\Carbon::parse($staff->marital()->anniversary )->format('j F Y') }}--}}
                                             @else
                                            NILL
                                     @endif
@@ -985,12 +987,10 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Date of Birth <span class="text-danger"> (dd/mm/yyyy)</span></label>
-                                        <input type="text" id="date" name="dob"  placeholder="{{ session('staff')->dob ? \Carbon\Carbon::createFromFormat('d/m/Y', session('staff')->dob)->format('jS F Y') : '' }}
-                                            " class="form-control">
-
-                                    </div>
+                                        <div class="form-group">
+                                            <label>Date of Birth <span class="text-danger"> (dd/mm/yyyy)</span></label>
+                                            <input type="text"  name="dob"  placeholder="{{ session('staff')->dob ? \Carbon\Carbon::createFromFormat('d/m/Y', session('staff')->dob)->format('jS F Y') : '' }}" class="date-mask form-control ">
+                                        </div>
                                     </div>
 
                                     <div class="col-md-6">
@@ -1224,11 +1224,15 @@
                         </div>
                             <div id="marriedInfo" style="display:none">
                                 <div class="row">
+
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Anniversary Date</label>
                                             <div class="cal-icon">
-                                                <input class="form-control datetimepicker"   name="anniversary" type="text" value="{{ \Carbon\Carbon::parse($staff->marital()->anniversary ??'')->format('Y-m-d') }}">
+                                                <input type="text"   name="anniversary"
+{{--                                                       placeholder="{{ $staff->marital()->anniversary ? \Carbon\Carbon::createFromFormat('d/m/Y'  }}"--}}
+                                                       class="date-mask form-control ">
+
                                             </div>
                                         </div>
                                     </div>
@@ -1656,20 +1660,23 @@
                                                             <label class="focus-label">Course</label>
                                                         </div>
                                                     </div>
+
                                                     <div class="col-md-6">
-                                                        <div class="form-group form-focus focused">
+                                                        <div class="form-group form-focus focused ">
                                                             <div class="cal-icon">
-                                                                <input type="text" class="form-control floating datetimepicker" name="start_date[]"   value="{{ $academic->start_date }}" readonly>
+                                                                <input type="text"  name="start_date[]"  placeholder="{{ $academic->start_date ?? 'Starting Date' }}
+                                                                    " class="date-mask form-control">
+{{----}}
                                                             </div>
-                                                            <label class="focus-label">Starting Date</label>
+                                                            <label class="focus-label">Starting Date<span class="text-danger"> (dd/mm/yyyy)</span></label>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group form-focus focused">
                                                             <div class="cal-icon">
-                                                                <input type="text" class="form-control floating datetimepicker" name="complete_date[]" value="{{ $academic->complete_date }}">
+                                                                <input type="text" class="date-mask form-control " name="complete_date[]" value="{{ $academic->complete_date }}">
                                                             </div>
-                                                            <label class="focus-label">Complete Date</label>
+                                                            <label class="focus-label">Complete Date<span class="text-danger"> (dd/mm/yyyy)</span></label>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
@@ -1708,17 +1715,16 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group form-focus focused">
                                                         <div class="cal-icon">
-                                                            <input type="text" class="form-control floating mydatetimepicker" name="start_date[]">
-                                                        </div>
-                                                        <label class="focus-label">Starting Date</label>
+                                                            <input type="text"  name="start_date[]"   class="date-mask form-control">                                                        </div>
+                                                        <label class="focus-label">Starting Date<span class="text-danger"> (dd/mm/yyyy)</span></label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group form-focus focused">
                                                         <div class="cal-icon">
-                                                            <input type="text" class="form-control floating mydatetimepicker" name="complete_date[]">
+                                                            <input type="text" class="date-mask form-control " name="complete_date[]">
                                                         </div>
-                                                        <label class="focus-label">Complete Date</label>
+                                                        <label class="focus-label">Complete Date<span class="text-danger"> (dd/mm/yyyy)</span></label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
@@ -1795,7 +1801,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label>Too <span class="text-danger">*</span></label>
+                                            <label>To <span class="text-danger">*</span></label>
                                             <div class="cal-icon">
                                                 <input type="text" class="form-control floating mydatetimepicker" name="end_date"   value="{{$staff->work()->ministry_end_date ?? ''}}" >
                                             </div>
@@ -1904,20 +1910,10 @@
         $(document).ready(function() {
             // Function to initialize datepicker
             function initializeDatepicker() {
-                $('.mydatetimepicker').datetimepicker({
-                    format: 'YYYY-MM-DD',
-                    useCurrent: false,  // Allow any date, including past dates
-                    allowInputToggle: true,  // Allow manual input (but we handle this with readonly)
-                    showClear: true,  // Show clear button
-                    showClose: true,  // Show close button
-                    showTodayButton: true,  // Show "Today" button
-                    widgetPositioning: {
-                        horizontal: 'auto',
-                        vertical: 'bottom'
-                    }
-                // Prevent manual input
+                'use strict';
 
-                });
+                $.mask.definitions['~'] = '[+-]';
+                $('.date-mask').mask('99/99/9999');
             }
 
             // Function to add a new education card
@@ -1943,17 +1939,18 @@
                             <div class="col-md-6">
                                 <div class="form-group form-focus focused">
                                     <div class="cal-icon">
-                                        <input type="text" class="form-control floating mydatetimepicker" name="start_date[]">
+
+                                        <input type="text" class="date-mask form-control " name="start_date[]">
                                     </div>
-                                    <label class="focus-label">Starting Date</label>
+                                    <label class="focus-label">Starting Date<span class="text-danger"> (dd/mm/yyyy)</span></label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group form-focus focused">
                                     <div class="cal-icon">
-                                        <input type="text" class="form-control floating mydatetimepicker" name="complete_date[]">
+                                        <input type="text" class="date-mask form-control " name="complete_date[]">
                                     </div>
-                                    <label class="focus-label">Complete Date</label>
+                                    <label class="focus-label">Complete Date<span class="text-danger"> (dd/mm/yyyy)</span></label>
                                 </div>
                             </div>
                             <div class="col-md-6">

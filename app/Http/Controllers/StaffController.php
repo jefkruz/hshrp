@@ -359,16 +359,16 @@ class StaffController extends Controller
     public function updateEducationProfile(Request $request)
     {
 
+
         // Validate the request
         $request->validate([
-            'institution.*' => 'required|string|max:255',
-            'subject.*' => 'required|string|max:255',
-            'start_date.*' => 'required|date',
-            'complete_date.*' => 'required|date',
-            'degree.*' => 'required|string|max:255',
-            'grade.*' => 'nullable|string|max:255',
+            'institution.*' => 'required',
+            'subject.*' => 'required',
+            'start_date.*' => 'required',
+            'complete_date.*' => 'required',
+            'degree.*' => 'required',
+            'grade.*' => 'nullable',
         ]);
-
 
         // Assuming you have a user or staff model where you save this data
         $user = Session::get('staff');
@@ -390,6 +390,15 @@ class StaffController extends Controller
                 'grade' => $request->grade[$key] ?? null,  // Handle optional grade
             ]);
         }
+//        // Retrieve the latest data from the database
+//        $updatedStaff = Staff::with('academicProfiles')->findOrFail($user->id);
+//
+//        // Merge the existing staff data with the updated education profile data
+//        $mergedData = $user->toArray();
+//        $mergedData['academicProfiles'] = $updatedStaff->academicProfiles;
+//
+//        // Update the session with the merged data
+//        Session::put('staff', $mergedData);
 
         return redirect()->back()->with('message', 'Education profile updated successfully!');
     }
