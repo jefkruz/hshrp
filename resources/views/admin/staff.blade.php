@@ -40,8 +40,6 @@
                                         <td>
 
                                             <form action="{{ route('admin.staffDelete',$item->id) }}" method="POST" onsubmit="return confirm('Are You sure you want to delete')">
-                                                <a href="{{ route('admin.staffEdit',$item->id) }}"
-                                                   class="btn btn-purple   btn-sm"><i class="fa fa-fw fa-edit"></i>Edit</a>
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>

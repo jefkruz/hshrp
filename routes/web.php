@@ -76,8 +76,8 @@ Route::group(['middleware' => 'isAdmin', 'prefix' => 'admin'], function(){
     Route::get('units', [AdminController::class, 'departments'])->name('admin.departments');
     Route::get('unit/{id}', [AdminController::class, 'viewDepartment'])->name('admin.view_department');
     Route::get('staff', [AdminController::class, 'staff'])->name('admin.staff');
-    Route::get('staff/edit/{id}', [AdminController::class, 'staffEdit'])->name('admin.staffEdit');
-    Route::patch('staff/update/{id}', [AdminController::class, 'staffUpdate'])->name('admin.staffUpdate');
+
+    Route::post('staff/update/', [AdminController::class, 'staffUpdate'])->name('admin.staffUpdate');
     Route::delete('staff/delete/{id}', [AdminController::class, 'staffDelete'])->name('admin.staffDelete');
 
     Route::get('staff/view/{id}', [AdminController::class, 'viewStaff'])->name('admin.viewStaff');

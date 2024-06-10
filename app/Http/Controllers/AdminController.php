@@ -127,6 +127,46 @@ class AdminController extends Controller
         return view('admin.view_staff', $data);
     }
 
+    public function staffUpdate(Request $request)
+    {
+        $request->validate([
+
+            'staff_id' => 'required',
+            'title' => 'required|string',
+
+            'firstname' => 'required|string',
+            'lastname' => 'required|string',
+            'middlename' => 'required|string',
+            'email' => 'required|email',
+            'alt_email' => 'required|email',
+            'phone' => 'required|string',
+            'kc_phone' => 'required|string',
+            'portal_id' => 'required',
+            'house_address' => 'required|string',
+            'bus_stop' => 'required|string',
+            'city' => 'required|string',
+
+        ]);
+        $staff = Staff::findOrFail($request->input('staff_id'));
+        $staff->title = $request->input('title');
+        $staff->middlename = $request->input('middlename');
+        $staff->firstname = $request->input('firstname');
+        $staff->lastname = $request->input('lastname');
+        $staff->email = $request->input('email');
+        $staff->alt_email = $request->input('alt_email');
+        $staff->phone = $request->input('phone');
+        $staff->kc_phone = $request->input('kc_phone');
+        $staff->portal_id = $request->input('portal_id');
+
+        $staff->house_address = $request->input('house_address');
+        $staff->bus_stop = $request->input('bus_stop');
+        $staff->city = $request->input('city');
+
+
+        $staff->save();
+        return back()->with('message', 'Staff info updated');
+    }
+
     public function staffDelete($id)
     {
         $staff = Staff::findOrFail($id);

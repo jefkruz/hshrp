@@ -55,7 +55,8 @@
         <div class="row user-tabs">
             <div class="col-lg-12 col-md-12 col-sm-12 line-tabs">
                 <ul class="nav nav-tabs nav-tabs-bottom">
-                    <li class="nav-item"><a href="#emp_projects" data-toggle="tab" class="nav-link active">Projects Assigned</a></li>
+                    <li class="nav-item"><a href="#emp_profile" data-toggle="tab" class="nav-link active">Basic Profile</a></li>
+                    <li class="nav-item"><a href="#emp_projects" data-toggle="tab" class="nav-link ">Projects Assigned</a></li>
                     <li class="nav-item"><a href="#emp_goals" data-toggle="tab" class="nav-link">Goals and Reports</a></li>
                     <li class="nav-item"><a href="#emp_appraisals" data-toggle="tab" class="nav-link">Appraisals</a></li>
                 </ul>
@@ -64,7 +65,119 @@
     </div>
 
     <div class="tab-content">
-        <div class="tab-pane fade active show" id="emp_projects">
+        <div class="tab-pane fade active show" id="emp_profile">
+            <div class="card">
+                <div class="card-header">
+                    <a href="{{route('admin.staff')}}" class="btn btn-info float-right">Back</a>
+                </div>
+                <div class="card-body">
+                    <form action="{{route('admin.staffUpdate')}}" enctype="multipart/form-data" method="POST">
+                        @csrf
+                        <div class="row">
+                            <div class="col-md-12">
+                            <input type="hidden" name="staff_id" value="{{$member_data['member']->id}}">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Title</label>
+                                            <select class="form-control form-select "   required name="title" >
+                                                <option value="" {{ $member_data['member']->title ? 'selected' : '' }}>--Select--</option>
+                                                <option value="Brother" {{ $member_data['member']->title == 'Brother' ? 'selected' : '' }}>Brother</option>
+                                                <option value="Sister" {{ $member_data['member']->title == 'Sister' ? 'selected' : '' }}>Sister</option>
+                                                <option value="Pastor" {{ $member_data['member']->title == 'Pastor' ? 'selected' : '' }}>Pastor</option>
+                                                <option value="Deacon" {{ $member_data['member']->title == 'Deacon' ? 'selected' : '' }}>Deacon</option>
+                                                <option value="Deaconess" {{ $member_data['member']->title == 'Deaconess' ? 'selected' : '' }}>Deaconess</option>
+                                                <option value="Evangelist" {{$member_data['member']->title == 'Evangelist' ? 'selected' : '' }}>Evangelist</option>
+                                                <option value="Reverend" {{ $member_data['member']->title == 'Reverend' ? 'selected' : '' }}>Reverend</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>First Name</label>
+                                            <input type="text" class="form-control" name="firstname"  value="{{$member_data['member']->firstname}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label> Middle Name</label>
+                                            <input type="text" class="form-control" required name="middlename" value="{{$member_data['member']->middlename}}" placeholder="Enter Middle Name">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Last Name</label>
+                                            <input type="text"  class="form-control" name="lastname" value="{{$member_data['member']->lastname}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label> Official Email Address</label>
+                                            <input type="text"  name="email" class="form-control"  placeholder="Enter Email" value="{{$member_data['member']->email}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Alternate Email</label>
+                                            <input type="text" name="alt_email"  placeholder="Enter other Email" class="form-control" value="{{$member_data['member']->alt_email}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Phone Number</label>
+                                            <input type="text" class="form-control" name="phone" required  placeholder="Enter Phone Number" value="{{$member_data['member']->phone}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>KingsChat Number</label>
+                                            <input type="text" class="form-control" name="kc_phone"  placeholder="Enter KingsChat Number" value="{{$member_data['member']->kc_phone}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Portal ID</label>
+                                            <input type="text" class="form-control" name="portal_id"  placeholder="Enter Portal ID" value="{{$member_data['member']->portal_id}}">
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Address</label>
+                                    <input type="text" class="form-control" required name="house_address" value="{{$member_data['member']->house_address}}" placeholder="Enter Address">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Nearest Bus Stop</label>
+                                    <input type="text" class="form-control"  required placeholder="Enter Bus Stop" name="bus_stop" value="{{$member_data['member']->bus_stop}}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>City</label>
+                                    <input type="text" class="form-control" required name="city" placeholder="Enter City" value="{{$member_data['member']->city}}">
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="submit-section">
+                            <button class="btn btn-primary submit-btn">Update</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="tab-pane fade " id="emp_projects">
             <div class="row">
                 @foreach($member_data['projects'] as $project)
                     <div class="col-lg-4 col-sm-6 col-md-4 col-xl-3">
