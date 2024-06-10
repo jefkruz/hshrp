@@ -11,7 +11,14 @@ class SubDepartment extends Model
     static $rules = [
         'name' => 'required',
     ];
-
+    public function hod()
+    {
+        $leader = Staff::find($this->hod_id);
+        if($leader){
+            $leader->fullname = $leader->title . ' ' . $leader->firstname . ' ' . $leader->lastname;
+        }
+        return $leader;
+    }
     protected $perPage = 20;
 
     /**

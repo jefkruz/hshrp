@@ -38,6 +38,7 @@
 
 										<th>Name</th>
 
+
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -47,6 +48,7 @@
                                             <td>{{ ++$i }}</td>
 
 											<td>{{ $subDepartment->name }}</td>
+
 
                                             <td>
                                                 <form action="{{ route('sub-departments.destroy',$subDepartment->id) }}" method="POST">

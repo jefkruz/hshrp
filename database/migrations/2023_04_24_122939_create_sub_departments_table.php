@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('sub_departments', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('hod_id')->nullable();
             $table->timestamps();
         });
         $d = new \App\Models\SubDepartment();

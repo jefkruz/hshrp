@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Staff;
 use App\Models\SubDepartment;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
@@ -38,6 +39,7 @@ class SubDepartmentController extends Controller
         $data['menu'] = $m->fetchMenu();
         $data['page_title'] = 'Sub Department';
         $data['subDepartment'] = new SubDepartment();
+        $data['staffs'] = Staff::all();
         return view('sub-department.create', $data);
     }
 
@@ -49,12 +51,22 @@ class SubDepartmentController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate(SubDepartment::$rules);
+        $request->validate([
+            'hod_id' => 'required',
+            'name' => 'required',
+        ]);
 
-        $subDepartment = SubDepartment::create($request->all());
+        $dept = new SubDepartment();
+        $dept->name = $request->name;
+        $dept->hod_id = $request->hod_id;
+
+        $dept->save();
+        $staff = Staff::findOrFail($request->hod_id);
+        $staff->is_hod = 'yes';
+        $staff->save();
 
         return redirect()->route('sub-departments.index')
-            ->with('success', 'SubDepartment created successfully.');
+            ->with('message', 'SubDepartment created successfully.');
     }
 
     /**
@@ -80,6 +92,7 @@ class SubDepartmentController extends Controller
     {
         $m = new MenuController();
         $data['menu'] = $m->fetchMenu();
+        $data['staffs'] = Staff::all();
         $data['page_title'] = 'Edit Sub Department';
         $data['subDepartment'] = SubDepartment::find($id);
 
@@ -95,19 +108,48 @@ class SubDepartmentController extends Controller
      */
     public function update(Request $request, SubDepartment $subDepartment)
     {
-        request()->validate(SubDepartment::$rules);
+        $request->validate([
+            'hod_id' => 'required',
+            'name' => 'required',
+        ]);
 
-        $subDepartment->update($request->all());
+
+        $dept = SubDepartment::where('id', $subDepartment->id)->first();
+        $dept->name = $request->name;
+        $dept->hod_id = $request->hod_id;
+
+        $dept->save();
+
+        $staff = Staff::where('id',$subDepartment->hod_id)->first();
+        $staff->is_hod = 'no';
+        $staff->save();
+
+        $staff = Staff::where('id',$request->hod_id)->first();
+        $staff->is_hod = 'yes';
+        $staff->save();
 
         return redirect()->route('sub-departments.index')
-            ->with('success', 'SubDepartment updated successfully');
+            ->with('message', 'SubDepartment updated successfully');
     }
 
-    /**
-     * @param int $id
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Exception
-     */
+    public function assignDeptHead($id, Request $request)
+    {
+        $request->validate([
+            'leader_id' => 'required'
+        ]);
+
+        $dept = SubDepartment::findOrFail($id);
+
+        $dept->leader_id = $request->leader_id;
+        $dept->status = 'assigned';
+        $dept->save();
+
+        $staff = Staff::findOrFail($request->leader_id);
+        $staff->is_leader = 'yes';
+        $staff->save();
+
+        return back()->with('message', 'Unit head assigned');
+    }
     public function destroy($id)
     {
         $subDepartment = SubDepartment::find($id)->delete();

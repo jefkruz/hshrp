@@ -43,6 +43,7 @@ return new class extends Migration
             $table->string('city')->nullable();
             $table->string('country')->nullable();
             $table->enum('is_leader', ['yes', 'no'])->default('no');
+            $table->enum('is_hod', ['yes', 'no'])->nullable();
             $table->string('kc_token')->nullable();
             $table->string('status')->nullable();
             $table->string('nok1_name')->nullable();

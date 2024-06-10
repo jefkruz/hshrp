@@ -22,7 +22,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>NAME</th>
-
+                                    <th>HOD</th>
                                     <th>ACTION</th>
                                 </tr>
                                 </thead>
@@ -31,6 +31,7 @@
                                     <tr>
                                         <td>{{$i + 1}}</td>
                                         <td>{{$sub->name}}</td>
+                                        <td>{{ $sub->hod()->fullname ?? ''}}</td>
 
                                         <td>
                                             <form action="{{ route('sub-departments.destroy',$sub->id) }}" method="POST">

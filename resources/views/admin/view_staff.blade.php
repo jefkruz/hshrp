@@ -19,8 +19,8 @@
                                     <div class="profile-info-left">
                                         <h3 class="user-name m-t-0 mb-0">{{$member_data['member']->title}} {{$member_data['member']->firstname}} {{$member_data['member']->lastname}}</h3>
                                         <h6 class="text-muted">{{$member_data['member']->department()->name}} @if($member_data['member']->is_leader == 'yes')<span class="text-danger">:: UNIT HEAD</span>@endif</h6>
-                                        <small class="text-muted">{{$member_data['member']->designation}}</small>
-                                        <div class="staff-id">Portal ID : {{$member_data['member']->portal_id}}</div>
+                                        <small class="text-muted">{{$member_data['member']->designation ?? 'NILL'}}</small>
+                                        <div class="staff-id">Portal ID : {{$member_data['member']->portal_id ?? 'NILL'}}</div>
                                     </div>
                                 </div>
                                 <div class="col-md-7">
@@ -31,15 +31,15 @@
                                         </li>
                                         <li>
                                             <div class="title">Marital Status:</div>
-                                            <div class="text">{{$member_data['member']->marital_status}}</div>
+                                            <div class="text">{{$member_data['member']->marital_status ?? 'NILL'}}</div>
                                         </li>
                                         <li>
                                             <div class="title">Nationality:</div>
-                                            <div class="text">{{$member_data['member']->nationality}}</div>
+                                            <div class="text">{{$member_data['member']->nationality?? 'NILL'}}</div>
                                         </li>
                                         <li>
                                             <div class="title">Gender:</div>
-                                            <div class="text">{{$member_data['member']->gender}}</div>
+                                            <div class="text">{{$member_data['member']->gender?? 'NILL'}}</div>
                                         </li>
                                     </ul>
                                 </div>
