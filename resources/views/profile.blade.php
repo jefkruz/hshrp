@@ -328,6 +328,32 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-6 d-flex">
+                    <div class="card profile-box flex-fill">
+                        <div class="card-body">
+                            <h3 class="card-title">Education Informations <a href="#" class="edit-icon" data-toggle="modal" data-target="#education_info"><i class="fa fa-pencil"></i></a></h3>
+                            <div class="experience-box">
+                                <ul class="experience-list">
+                                    @foreach ($staff->academicProfiles as $academic)
+                                        <li>
+                                            <div class="experience-user">
+                                                <div class="before-circle"></div>
+                                            </div>
+                                            <div class="experience-content">
+                                                <div class="timeline-content">
+                                                    <a href="#" class="name">{{ ucwords($academic->institution) }}</a>
+                                                    <div>{{ucwords($academic->degree)  }} in {{ ucwords($academic->subject )}}</div>
+                                                    <span class="time">{{ \Carbon\Carbon::parse($academic->start_date)->format('Y') }} - {{ \Carbon\Carbon::parse($academic->complete_date)->format('Y') }}</span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    @endforeach
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 {{--                <div class="col-md-6 d-flex">--}}
 {{--                    <div class="card profile-box flex-fill">--}}
 {{--                        <div class="card-body">--}}
@@ -380,32 +406,7 @@
 
             </div>
             <div class="row">
-                <div class="col-md-6 d-flex">
-                    <div class="card profile-box flex-fill">
-                        <div class="card-body">
-                            <h3 class="card-title">Education Informations <a href="#" class="edit-icon" data-toggle="modal" data-target="#education_info"><i class="fa fa-pencil"></i></a></h3>
-                            <div class="experience-box">
-                                <ul class="experience-list">
-                                    @foreach ($staff->academicProfiles as $academic)
-                                    <li>
-                                        <div class="experience-user">
-                                            <div class="before-circle"></div>
-                                        </div>
-                                        <div class="experience-content">
-                                            <div class="timeline-content">
-                                                <a href="#" class="name">{{ ucwords($academic->institution) }}</a>
-                                                <div>{{ucwords($academic->degree)  }} in {{ ucwords($academic->subject )}}</div>
-                                                <span class="time">{{ \Carbon\Carbon::parse($academic->start_date)->format('Y') }} - {{ \Carbon\Carbon::parse($academic->complete_date)->format('Y') }}</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    @endforeach
 
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="col-md-6 d-flex">
                     <div class="card profile-box flex-fill">
                         <div class="card-body">
