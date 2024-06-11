@@ -49,8 +49,14 @@ return new class extends Migration
             $table->string('nok1_name')->nullable();
             $table->string('nok1_phone')->nullable();
             $table->string('nok1_relationship')->nullable();
+            $table->string('nok1_occupation')->nullable();
+            $table->string('nok1_kc_handle')->nullable();
+            $table->string('nok1_address')->nullable();
             $table->string('nok2_name')->nullable();
             $table->string('nok2_phone')->nullable();
+            $table->string('nok2_relationship')->nullable();
+            $table->string('nok2_occupation')->nullable();
+            $table->string('nok2_kc_handle')->nullable();
             $table->string('nok2_relationship')->nullable();
             $table->string('genotype')->nullable();
             $table->string('blood_group')->nullable();

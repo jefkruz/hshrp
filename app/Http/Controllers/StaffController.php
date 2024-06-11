@@ -312,9 +312,13 @@ class StaffController extends Controller
             'nok1_name' =>'required|string',
             'nok1_phone' =>'required|string',
             'nok1_relationship' =>'required|string',
+            'nok1_occupation' =>'required|string',
+            'nok1_address' =>'required|string',
             'nok2_name' =>'required|string',
             'nok2_phone' =>'required|string',
             'nok2_relationship' =>'required|string',
+            'nok2_occupation' =>'required|string',
+            'nok2_address' =>'required|string',
         ]);
 
         $user = Session::get('staff');
@@ -323,9 +327,15 @@ class StaffController extends Controller
         $staff->nok1_name = $request->nok1_name;
         $staff->nok1_relationship = $request->nok1_relationship;
         $staff->nok1_phone = $request->nok1_phone;
+        $staff->nok1_occupation = $request->nok1_occupation;
+        $staff->nok1_address = $request->nok1_address;
+        $staff->nok1_kc_handle = $request->nok1_kc_handle;
         $staff->nok2_name = $request->nok2_name;
         $staff->nok2_relationship = $request->nok2_relationship;
         $staff->nok2_phone = $request->nok2_phone;
+        $staff->nok2_occupation = $request->nok2_occupation;
+        $staff->nok2_address = $request->nok2_address;
+        $staff->nok2_kc_handle = $request->nok2_kc_handle;
         $staff->save();
         Session::put('staff', $staff);
         return back()->with('message', 'Next of Kin updated successfully.');

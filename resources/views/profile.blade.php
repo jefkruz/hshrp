@@ -1582,6 +1582,24 @@
                                             <input type="text" class="form-control" name="nok1_phone" required  value="{{$staff->nok1_phone}}">
                                         </div>
                                     </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Occupation <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" name="nok1_occupation" required  value="{{$staff->nok1_occupation}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>KingsChat Handle </label>
+                                            <input type="text" class="form-control" name="nok1_kc_handle"   value="{{$staff->nok1_kc_handle}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>House Address <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" name="nok1_address"   value="{{$staff->nok1_address}}">
+                                        </div>
+                                    </div>
 
                                 </div>
                             </div>
@@ -1610,6 +1628,24 @@
                                             <label>Phone <span class="text-danger">*</span></label>
                                             <input type="text" class="form-control" name="nok2_phone" required value="{{$staff->nok2_phone}}">
 
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Occupation <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" name="nok2_occupation" required  value="{{$staff->nok2_occupation}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>KingsChat Handle </label>
+                                            <input type="text" class="form-control" name="nok2_kc_handle"   value="{{$staff->nok2_kc_handle}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>House Address <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" name="nok2_address"   value="{{$staff->nok2_address}}">
                                         </div>
                                     </div>
 
