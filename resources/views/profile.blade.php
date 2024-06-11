@@ -253,6 +253,18 @@
                                     <div class="title">Phone Number </div>
                                     <div class="text">{{$staff->nok1_phone ?? 'NILL'}}</div>
                                 </li>
+                                <li>
+                                    <div class="title">Occupation </div>
+                                    <div class="text">{{$staff->nok1_occupation ?? 'NILL'}}</div>
+                                </li>
+                                <li>
+                                    <div class="title">Kingschat Handle </div>
+                                    <div class="text">{{$staff->nok1_kc_handle ?? 'NILL'}}</div>
+                                </li>
+                                <li>
+                                    <div class="title"> House Address</div>
+                                    <div class="text">{{$staff->nok1_address ?? 'NILL'}}</div>
+                                </li>
                             </ul>
                             <hr>
                             <h5 class="section-title text-primary">Contact Two</h5>
@@ -268,6 +280,18 @@
                                 <li>
                                     <div class="title">Phone </div>
                                     <div class="text">{{$staff->nok2_phone ?? 'NILL'}}</div>
+                                </li>
+                                <li>
+                                    <div class="title">Occupation </div>
+                                    <div class="text">{{$staff->nok2_occupation ?? 'NILL'}}</div>
+                                </li>
+                                <li>
+                                    <div class="title">Kingschat Handle </div>
+                                    <div class="text">{{$staff->nok2_kc_handle ?? 'NILL'}}</div>
+                                </li>
+                                <li>
+                                    <div class="title"> House Address</div>
+                                    <div class="text">{{$staff->nok2_address ?? 'NILL'}}</div>
                                 </li>
                             </ul>
                         </div>
