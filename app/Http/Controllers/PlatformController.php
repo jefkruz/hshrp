@@ -8,6 +8,7 @@ use App\Models\Country;
 use App\Models\Department;
 use App\Models\Director;
 use App\Models\Goal;
+use App\Models\MaritalProfile;
 use App\Models\MinistryProfile;
 use App\Models\Project;
 use App\Models\Report;
@@ -152,7 +153,10 @@ class PlatformController extends Controller
 
     public function profile()
     {
-        $staff = Session::get('staff');
+
+        $staff =  Session::get('staff');
+
+
 
         $m = new MenuController();
 
@@ -162,11 +166,13 @@ class PlatformController extends Controller
         } else {
             $data['superior']  = Staff::find($department->leader_id);
         }
+        $data['marital'] = MaritalProfile::where('staff_id', $staff->id)->first();
         $data['page_title'] = 'Profile';
         $data['countries'] = Country::all();
         $data['zones'] = Zone::all();
         $data['is_leader'] = $staff->is_leader;
-        $data['department'] = $department;
+        $data['department'] = $staff->department();
+
         $data['staff'] = $staff;
         $data['menu'] = $m->fetchMenu();
         return view('profile', $data);

@@ -13,6 +13,7 @@ use App\Models\ParentalProfile;
 use App\Models\Project;
 use App\Models\ProjectTeam;
 use App\Models\Staff;
+use App\Models\StaffSessionData;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -218,26 +219,21 @@ class StaffController extends Controller
 
         $user = Session::get('staff');
 
-        $exists = MaritalProfile::where('staff_id', $user->id)->first();
 
-        if ($exists) {
-            $staff = $exists;
-        }
-        else{
-            $staff = new MaritalProfile();
-        }
-        $staff->staff_id = $user->id;
-        $staff->marital_status = $request->marital_status;
-        $staff->anniversary = $request->anniversary;
-        $staff->spouse_name = $request->spouse_name;
-        $staff->spouse_phone = $request->spouse_phone;
-        $staff->spouse_email = $request->spouse_email;
-        $staff->spouse_occupation = $request->spouse_occupation;
-        $staff->spouse_office = $request->spouse_office;
-        $staff->children_number = $request->children_number;
-        $staff->children_school = $request->children_school;
-        $staff->save();
-        return back()->with('message', 'Marital Status updated successfully.');
+        $maritalProfile = MaritalProfile::firstOrNew(['staff_id' => $user->id]);
+        $maritalProfile->marital_status = $request->marital_status;
+        $maritalProfile->anniversary = $request->anniversary;
+        $maritalProfile->spouse_name = $request->spouse_name;
+        $maritalProfile->spouse_phone = $request->spouse_phone;
+        $maritalProfile->spouse_email = $request->spouse_email;
+        $maritalProfile->spouse_occupation = $request->spouse_occupation;
+        $maritalProfile->spouse_office = $request->spouse_office;
+        $maritalProfile->children_number = $request->children_number;
+        $maritalProfile->children_school = $request->children_school;
+        $maritalProfile->save();
+
+
+        return to_route('profile')->with('message', 'Marital Status updated successfully.');
     }
 
     public function updateBankProfile(Request $request)

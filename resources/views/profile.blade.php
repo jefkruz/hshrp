@@ -11,19 +11,19 @@
                     <div class="profile-view">
                         <div class="profile-img-wrap">
                             <div class="profile-img">
-                                <a href="#"><img alt="" src="{{session('staff')->profile_pic}}"></a>
+                                <a href="#"><img alt="" src="{{$staff->profile_pic}}"></a>
                             </div>
                         </div>
                         <div class="profile-basic">
                             <div class="row">
                                 <div class="col-md-5">
                                     <div class="profile-info-left">
-                                        <h3 class="user-name m-t-0 mb-0">{{session('staff')->title}} {{session('staff')->firstname}} {{session('staff')->lastname}}</h3>
+                                        <h3 class="user-name m-t-0 mb-0">{{$staff->title}} {{$staff->firstname}} {{$staff->lastname}}</h3>
                                         <h6 class="text-muted">Unit: {{$department->name}} @if($is_leader)<span class="text-danger">:: SUPERVISOR</span>@endif</h6>
-                                        <small class="text-muted">Designation: {{session('staff')->designation}}</small>
-                                        <div class="text">Email :<a href="">{{session('staff')->email}}</a></div>
+                                        <small class="text-muted">Designation: {{$staff->designation}}</small>
+                                        <div class="text">Email :<a href="">{{$staff->email}}</a></div>
 
-                                        <div class="staff-id">Portal ID : {{session('staff')->portal_id ?? 'NULL'}}</div>
+                                        <div class="staff-id">Portal ID : {{$staff->portal_id ?? 'NULL'}}</div>
 {{--                                        <div class="small doj text-muted">Date of Join : 1st Jan 2013</div>--}}
                                         <div class="staff-msg"><a class="btn btn-custom" href="#">Send Message</a></div>
                                     </div>
@@ -32,27 +32,27 @@
                                     <ul class="personal-info">
                                         <li>
                                             <div class="title">Phone Number:</div>
-                                            <div class="text"><a href="">{{session('staff')->phone ?? 'NULL'}}</a></div>
+                                            <div class="text"><a href="">{{$staff->phone ?? 'NULL'}}</a></div>
                                         </li>
                                         <li>
                                             <div class="title">Alternate Email:</div>
-                                            <div class="text"><a href="">{{session('staff')->alt_email}}</a></div>
+                                            <div class="text"><a href="">{{$staff->alt_email}}</a></div>
                                         </li>
                                         <li>
                                             <div class="title">Birthday:</div>
                                             <div class="text">
-                                                {{ session('staff')->dob ? \Carbon\Carbon::createFromFormat('d/m/Y', session('staff')->dob)->format('jS F Y') : 'NILL' }}
+                                                {{ $staff->dob ? \Carbon\Carbon::createFromFormat('d/m/Y', $staff->dob)->format('jS F Y') : 'NILL' }}
 
 
                                             </div>
                                         </li>
                                         <li>
                                             <div class="title">Address:</div>
-                                            <div class="text">{{session('staff')->house_address ?? 'NULL'}}</div>
+                                            <div class="text">{{$staff->house_address ?? 'NULL'}}</div>
                                         </li>
                                         <li>
                                             <div class="title">Gender:</div>
-                                            <div class="text">{{session('staff')->gender ?? 'NULL'}}</div>
+                                            <div class="text">{{$staff->gender ?? 'NULL'}}</div>
                                         </li>
                                         <li>
                                             <div class="title">Reports to:</div>
@@ -152,6 +152,7 @@
                     <div class="card profile-box flex-fill">
                         <div class="card-body">
                             <h3 class="card-title">Marital Information <a href="#" class="edit-icon" data-toggle="modal" data-target="#marital_info_modal"><i class="fa fa-pencil"></i></a></h3>
+
                             <ul class="personal-info">
                                 <li>
                                     <div class="title">Marital Status</div>
@@ -238,6 +239,36 @@
                 <div class="col-md-6 d-flex">
                     <div class="card profile-box flex-fill">
                         <div class="card-body">
+                            <h3 class="card-title">Medical Information <a href="#" class="edit-icon" data-toggle="modal" data-target="#medical_info_modal"><i class="fa fa-pencil"></i></a></h3>
+
+                            <ul class="personal-info">
+                                <li>
+                                    <div class="title">Genotype</div>
+                                    <div class="text">{{$staff->genotype ?? 'NILL'}}</div>
+                                </li>
+                                <li>
+                                    <div class="title">Blood Group</div>
+                                    <div class="text">{{$staff->blood_group ?? 'NILL'}}</div>
+                                </li>
+                                <li>
+                                    <div class="title">Allergies</div>
+                                    <div class="text">{{$staff->allergies ?? 'NILL'}}</div>
+                                </li>
+                                <li>
+                                    <div class="title">Health Conditions</div>
+                                    <div class="text">{{$staff->health_conditions ?? 'NILL'}}</div>
+                                </li>
+                                <li>
+                                    <div class="title">Health Insurance</div>
+                                    <div class="text">{{$staff->health_insurance ?? 'NILL'}}</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 d-flex">
+                    <div class="card profile-box flex-fill">
+                        <div class="card-body">
                             <h3 class="card-title">Next Of Kin <a href="#" class="edit-icon" data-toggle="modal" data-target="#emergency_contact_modal"><i class="fa fa-pencil"></i></a></h3>
                             <h5 class="section-title text-primary">Contact One</h5>
                             <ul class="personal-info">
@@ -297,85 +328,56 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 d-flex">
-                    <div class="card profile-box flex-fill">
-                        <div class="card-body">
-                            <h3 class="card-title">Parent Information <a href="#" class="edit-icon" data-toggle="modal" data-target="#family_info_modal"><i class="fa fa-pencil"></i></a></h3>
+{{--                <div class="col-md-6 d-flex">--}}
+{{--                    <div class="card profile-box flex-fill">--}}
+{{--                        <div class="card-body">--}}
+{{--                            <h3 class="card-title">Parent Information <a href="#" class="edit-icon" data-toggle="modal" data-target="#family_info_modal"><i class="fa fa-pencil"></i></a></h3>--}}
 
-                            <ul class="personal-info">
-                                <li>
-                                    <div class="title"> Parents Alive</div>
-                                    <div class="text">{{$staff->parental()->parents_alive ?? 'NILL'}}</div>
-                                </li>
-                                <li>
-                                    <div class="title"> Parents Born Again</div>
-                                    <div class="text">{{$staff->parental()->parents_born_again ?? 'NILL'}}</div>
-                                </li>
-                                <li>
-                                    <div class="title">Ministry Members</div>
-                                    <div class="text">{{$staff->parental()->ministry_members ?? 'NILL'}}</div>
-                                </li>
-                                @if($staff->parental() && $staff->parental()->ministry_members =='No')
-                                <li>
-                                    <div class="title">Parents Denomination</div>
-                                    <div class="text">{{$staff->parental()->parents_denomination ?? 'NILL'}}</div>
-                                </li>
-                                @else
-                                    <li>
-                                        <div class="title">Parents Church</div>
-                                        <div class="text">{{$staff->parental()->parents_church ?? 'NILL'}}</div>
-                                    </li>
-                                    <li>
-                                        <div class="title">Parents Zone</div>
-                                        <div class="text">{{$staff->parental()->parents_zone ?? 'NILL'}}</div>
-                                    </li>
-                                    <li>
-                                        <div class="title">Parents Pastor</div>
-                                        <div class="text">{{$staff->parental()->parents_pastor ?? 'NILL'}}</div>
-                                    </li>
-                                @endif
-                                <li>
-                                    <div class="title">Number of Siblings</div>
-                                    <div class="text">{{$staff->parental()->siblings_number ?? 'NILL'}}</div>
-                                </li>
-                                <li>
-                                    <div class="title">Position in Family</div>
-                                    <div class="text">{{$staff->parental()->family_position?? 'NILL'}}</div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 d-flex">
-                    <div class="card profile-box flex-fill">
-                        <div class="card-body">
-                            <h3 class="card-title">Medical Information <a href="#" class="edit-icon" data-toggle="modal" data-target="#medical_info_modal"><i class="fa fa-pencil"></i></a></h3>
+{{--                            <ul class="personal-info">--}}
+{{--                                <li>--}}
+{{--                                    <div class="title"> Parents Alive</div>--}}
+{{--                                    <div class="text">{{$staff->parental()->parents_alive ?? 'NILL'}}</div>--}}
+{{--                                </li>--}}
+{{--                                <li>--}}
+{{--                                    <div class="title"> Parents Born Again</div>--}}
+{{--                                    <div class="text">{{$staff->parental()->parents_born_again ?? 'NILL'}}</div>--}}
+{{--                                </li>--}}
+{{--                                <li>--}}
+{{--                                    <div class="title">Ministry Members</div>--}}
+{{--                                    <div class="text">{{$staff->parental()->ministry_members ?? 'NILL'}}</div>--}}
+{{--                                </li>--}}
+{{--                                @if($staff->parental() && $staff->parental()->ministry_members =='No')--}}
+{{--                                <li>--}}
+{{--                                    <div class="title">Parents Denomination</div>--}}
+{{--                                    <div class="text">{{$staff->parental()->parents_denomination ?? 'NILL'}}</div>--}}
+{{--                                </li>--}}
+{{--                                @else--}}
+{{--                                    <li>--}}
+{{--                                        <div class="title">Parents Church</div>--}}
+{{--                                        <div class="text">{{$staff->parental()->parents_church ?? 'NILL'}}</div>--}}
+{{--                                    </li>--}}
+{{--                                    <li>--}}
+{{--                                        <div class="title">Parents Zone</div>--}}
+{{--                                        <div class="text">{{$staff->parental()->parents_zone ?? 'NILL'}}</div>--}}
+{{--                                    </li>--}}
+{{--                                    <li>--}}
+{{--                                        <div class="title">Parents Pastor</div>--}}
+{{--                                        <div class="text">{{$staff->parental()->parents_pastor ?? 'NILL'}}</div>--}}
+{{--                                    </li>--}}
+{{--                                @endif--}}
+{{--                                <li>--}}
+{{--                                    <div class="title">Number of Siblings</div>--}}
+{{--                                    <div class="text">{{$staff->parental()->siblings_number ?? 'NILL'}}</div>--}}
+{{--                                </li>--}}
+{{--                                <li>--}}
+{{--                                    <div class="title">Position in Family</div>--}}
+{{--                                    <div class="text">{{$staff->parental()->family_position?? 'NILL'}}</div>--}}
+{{--                                </li>--}}
+{{--                            </ul>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
 
-                            <ul class="personal-info">
-                                <li>
-                                    <div class="title">Genotype</div>
-                                    <div class="text">{{$staff->genotype ?? 'NILL'}}</div>
-                                </li>
-                                <li>
-                                    <div class="title">Blood Group</div>
-                                    <div class="text">{{$staff->blood_group ?? 'NILL'}}</div>
-                                </li>
-                                <li>
-                                    <div class="title">Allergies</div>
-                                    <div class="text">{{$staff->allergies ?? 'NILL'}}</div>
-                                </li>
-                                <li>
-                                    <div class="title">Health Conditions</div>
-                                    <div class="text">{{$staff->health_conditions ?? 'NILL'}}</div>
-                                </li>
-                                <li>
-                                    <div class="title">Health Insurance</div>
-                                    <div class="text">{{$staff->health_insurance ?? 'NILL'}}</div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
             </div>
             <div class="row">
                 <div class="col-md-6 d-flex">
@@ -940,7 +942,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="profile-img-wrap edit-img">
-                                    <img class="inline-block" src="{{session('staff')->profile_pic}}" alt="user">
+                                    <img class="inline-block" src="{{$staff->profile_pic}}" alt="user">
                                     <div class="fileupload btn">
                                         <span class="btn-text">edit</span>
                                         <input class="upload" type="file" name="profile_pic">
@@ -951,69 +953,69 @@
                                         <div class="form-group">
                                             <label>Title</label>
                                             <select class="form-control form-select "  readonly required name="title" >
-                                                <option value="" {{ !session('staff')->title ? 'selected' : '' }}>--Select--</option>
-                                                <option value="Brother" {{ session('staff')->title == 'Brother' ? 'selected' : '' }}>Brother</option>
-                                                <option value="Sister" {{ session('staff')->title == 'Sister' ? 'selected' : '' }}>Sister</option>
-                                                <option value="Pastor" {{ session('staff')->title == 'Pastor' ? 'selected' : '' }}>Pastor</option>
-                                                <option value="Deacon" {{ session('staff')->title == 'Deacon' ? 'selected' : '' }}>Deacon</option>
-                                                <option value="Deaconess" {{ session('staff')->title == 'Deaconess' ? 'selected' : '' }}>Deaconess</option>
-                                                <option value="Evangelist" {{session('staff')->title == 'Evangelist' ? 'selected' : '' }}>Evangelist</option>
-                                                <option value="Reverend" {{ session('staff')->title == 'Reverend' ? 'selected' : '' }}>Reverend</option>
+                                                <option value="" {{ !$staff->title ? 'selected' : '' }}>--Select--</option>
+                                                <option value="Brother" {{ $staff->title == 'Brother' ? 'selected' : '' }}>Brother</option>
+                                                <option value="Sister" {{ $staff->title == 'Sister' ? 'selected' : '' }}>Sister</option>
+                                                <option value="Pastor" {{ $staff->title == 'Pastor' ? 'selected' : '' }}>Pastor</option>
+                                                <option value="Deacon" {{ $staff->title == 'Deacon' ? 'selected' : '' }}>Deacon</option>
+                                                <option value="Deaconess" {{ $staff->title == 'Deaconess' ? 'selected' : '' }}>Deaconess</option>
+                                                <option value="Evangelist" {{$staff->title == 'Evangelist' ? 'selected' : '' }}>Evangelist</option>
+                                                <option value="Reverend" {{ $staff->title == 'Reverend' ? 'selected' : '' }}>Reverend</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>First Name</label>
-                                            <input type="text" class="form-control" name="firstname" readonly value="{{session('staff')->firstname}}">
+                                            <input type="text" class="form-control" name="firstname" readonly value="{{$staff->firstname}}">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label> Middle Name</label>
-                                            <input type="text" class="form-control" required name="middlename" value="{{session('staff')->middlename}}" placeholder="Enter Middle Name">
+                                            <input type="text" class="form-control" required name="middlename" value="{{$staff->middlename}}" placeholder="Enter Middle Name">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Last Name</label>
-                                            <input type="text" readonly class="form-control" name="lastname" value="{{session('staff')->lastname}}">
+                                            <input type="text" readonly class="form-control" name="lastname" value="{{$staff->lastname}}">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label> Official Email Address</label>
-                                            <input type="text"  name="email" class="form-control" readonly placeholder="Enter Email" value="{{session('staff')->email}}">
+                                            <input type="text"  name="email" class="form-control" readonly placeholder="Enter Email" value="{{$staff->email}}">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Alternate Email</label>
-                                            <input type="text" name="alt_email"  placeholder="Enter other Email" class="form-control" value="{{session('staff')->alt_email}}">
+                                            <input type="text" name="alt_email"  placeholder="Enter other Email" class="form-control" value="{{$staff->alt_email}}">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Phone Number</label>
-                                            <input type="text" class="form-control" name="phone" required  placeholder="Enter Phone Number" value="{{session('staff')->phone}}">
+                                            <input type="text" class="form-control" name="phone" required  placeholder="Enter Phone Number" value="{{$staff->phone}}">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>KingsChat Number</label>
-                                            <input type="text" class="form-control" name="kc_phone"  placeholder="Enter KingsChat Number" value="{{session('staff')->kc_phone}}">
+                                            <input type="text" class="form-control" name="kc_phone"  placeholder="Enter KingsChat Number" value="{{$staff->kc_phone}}">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Portal ID</label>
-                                            <input type="text" class="form-control" name="portal_id"  placeholder="Enter Portal ID" value="{{session('staff')->portal_id}}">
+                                            <input type="text" class="form-control" name="portal_id"  placeholder="Enter Portal ID" value="{{$staff->portal_id}}">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Date of Birth <span class="text-danger"> (dd/mm/yyyy)</span></label>
-                                            <input type="text"  name="dob"  placeholder="{{ session('staff')->dob ? \Carbon\Carbon::createFromFormat('d/m/Y', session('staff')->dob)->format('jS F Y') : '' }}" class="date-mask form-control ">
+                                            <input type="text"  name="dob"  placeholder="{{ $staff->dob ? \Carbon\Carbon::createFromFormat('d/m/Y', $staff->dob)->format('jS F Y') : '' }}" class="date-mask form-control ">
                                         </div>
                                     </div>
 
@@ -1021,7 +1023,7 @@
                                         <div class="form-group">
                                             <label>Gender</label>
                                             <select disabled name="gender" class="select  form-control">
-                                                <option value=" {{session('staff')->gender}} selected">{{session('staff')->gender}}</option>
+                                                <option value=" {{$staff->gender}} selected">{{$staff->gender}}</option>
 
                                             </select>
                                         </div>
@@ -1033,19 +1035,19 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Address</label>
-                                    <input type="text" class="form-control" required name="house_address" value="{{session('staff')->house_address}}" placeholder="Enter Address">
+                                    <input type="text" class="form-control" required name="house_address" value="{{$staff->house_address}}" placeholder="Enter Address">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Nearest Bus Stop</label>
-                                    <input type="text" class="form-control"  required placeholder="Enter Bus Stop" name="bus_stop" value="{{session('staff')->bus_stop}}">
+                                    <input type="text" class="form-control"  required placeholder="Enter Bus Stop" name="bus_stop" value="{{$staff->bus_stop}}">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>City</label>
-                                    <input type="text" class="form-control" required name="city" placeholder="Enter City" value="{{session('staff')->city}}">
+                                    <input type="text" class="form-control" required name="city" placeholder="Enter City" value="{{$staff->city}}">
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -1053,7 +1055,7 @@
                                     <label>Country</label>
                                     <select class=" select form-control" required name="country">
                                         @foreach($countries as $country)
-                                        <option value="{{ $country->name }}" {{ session('staff')->country == $country->name ? 'selected' : '' }}>
+                                        <option value="{{ $country->name }}" {{ $staff->country == $country->name ? 'selected' : '' }}>
                                             {{ $country->name }}
                                         </option>
                                             @endforeach
@@ -1064,25 +1066,25 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Height</label>
-                                    <input type="text" class="form-control" required  placeholder="In Meters" name="height" value="{{session('staff')->height}}">
+                                    <input type="text" class="form-control" required  placeholder="In Meters" name="height" value="{{$staff->height}}">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Weight</label>
-                                    <input type="text" class="form-control"  required placeholder="in KG" name="weight" value="{{session('staff')->weight}}">
+                                    <input type="text" class="form-control"  required placeholder="in KG" name="weight" value="{{$staff->weight}}">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Shirt Size</label>
-                                    <input type="text" class="form-control"  required placeholder="American/British Size" name="shirt_size" value="{{session('staff')->shirt_size}}">
+                                    <input type="text" class="form-control"  required placeholder="American/British Size" name="shirt_size" value="{{$staff->shirt_size}}">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Suit/Dress Size</label>
-                                    <input type="text" class="form-control"  required placeholder="Enter Suit/Dress Size" name="dress_size" value="{{session('staff')->dress_size}}">
+                                    <input type="text" class="form-control"  required placeholder="Enter Suit/Dress Size" name="dress_size" value="{{$staff->dress_size}}">
                                 </div>
                             </div>
 
