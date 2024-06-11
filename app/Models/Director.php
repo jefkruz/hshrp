@@ -10,4 +10,9 @@ class Director extends Model
     use HasFactory;
 
     public $hidden = ['username', 'password'];
+
+    public function fullname()
+    {
+        return$this->title. " ". $this->firstname. " ". $this->lastname;
+    }
 }

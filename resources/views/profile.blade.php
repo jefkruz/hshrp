@@ -1256,9 +1256,7 @@
                                         <div class="form-group">
                                             <label>Anniversary Date</label>
                                             <div class="cal-icon">
-                                                <input type="text"   name="anniversary"
-{{--                                                       placeholder="{{ $staff->marital()->anniversary ? \Carbon\Carbon::createFromFormat('d/m/Y'  }}"--}}
-                                                       class="date-mask form-control ">
+                                                <input type="text"  name="anniversary" class="date-mask form-control ">
 
                                             </div>
                                         </div>
@@ -1311,6 +1309,50 @@
 
 
                              </div>
+                        <div id="childrenContainer">
+                            <div class="card child-card">
+                                <div class="card-body">
+                                    <h3 class="card-title">Children Information <a href="#" class="delete-icon" onclick="removeCard(this)"><i class="fa fa-trash-o"></i></a></h3>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group form-focus focused">
+                                                <input type="text" class="form-control floating" name="child_name[]" value="">
+                                                <label class="focus-label">Child's Full Name</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group form-focus focused">
+                                                <input type="text" class="form-control floating" name="child_school[]" value="">
+                                                <label class="focus-label">Child School</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group form-focus focused">
+                                                <input type="text" class="form-control floating" name="child_gender[]" value="">
+                                                <label class="focus-label">Child Gender</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group form-focus focused ">
+                                                <div class="cal-icon">
+                                                    <input type="text"  name="child_dob[]"  placeholder="" class="date-mask form-control">
+                                                    {{----}}
+                                                </div>
+                                                <label class="focus-label">Child DOB<span class="text-danger"> (dd/mm/yyyy)</span></label>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="add-more">
+                            <a href="#" id="addMore"><i class="fa fa-plus-circle"></i> Add More</a>
+                        </div>
                         <div class="submit-section">
                             <button class="btn btn-primary submit-btn">Submit</button>
                         </div>
@@ -2054,8 +2096,64 @@
             initializeDatepicker();
         });
     </script>
+            <script>
+                document.getElementById('addMore').addEventListener('click', function (event) {
+                    event.preventDefault();
+                    addMoreChildren();
+                });
 
+                function addMoreChildren() {
+                    const newChildCard = `
+            <div class="card child-card">
+                <div class="card-body">
+                    <h3 class="card-title">Children Information <a href="#" class="delete-icon" onclick="removeCard(this)"><i class="fa fa-trash-o"></i></a></h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group form-focus focused">
+                                <input type="text" class="form-control floating" name="child_name[]" value="">
+                                <label class="focus-label">Child's Full Name</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group form-focus focused">
+                                <input type="text" class="form-control floating" name="child_school[]" value="">
+                                <label class="focus-label">Child School</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group form-focus focused">
+                                <input type="text" class="form-control floating" name="child_gender[]" value="">
+                                <label class="focus-label">Child Gender</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group form-focus focused">
+                                <div class="cal-icon">
+                                    <input type="text" name="child_dob[]" placeholder="" class="date-mask form-control">
+                                </div>
+                                <label class="focus-label">Child DOB<span class="text-danger"> (dd/mm/yyyy)</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+                    document.getElementById('childrenContainer').insertAdjacentHTML('beforeend', newChildCard);
+                    initializeDateMask();
+                }
 
+                function removeCard(element) {
+                    element.closest('.card').remove();
+                }
+
+                function initializeDateMask() {
+                    $.mask.definitions['~'] = '[+-]';
+                    $('.date-mask').mask('99/99/9999');
+                }
+
+                $(document).ready(function() {
+                    initializeDateMask();
+                });
+            </script>
 
 
 

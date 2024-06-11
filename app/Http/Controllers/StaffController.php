@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AcademicProfile;
 use App\Models\BankProfile;
+use App\Models\ChildrenProfile;
 use App\Models\Department;
 use App\Models\Director;
 use App\Models\Goal;
@@ -201,6 +202,7 @@ class StaffController extends Controller
 
     public function updateMaritalProfile(Request $request){
 
+
         if ($request->marital_status == 'Married' ){
             $request->validate([
                 'marital_status' => 'required|string',
@@ -211,11 +213,8 @@ class StaffController extends Controller
                 'spouse_occupation' => 'required|string',
                 'spouse_office' => 'required|string',
                 'children_number' => 'required|integer',
-                'children_school' => 'required|string',
             ]);
         }
-
-
 
         $user = Session::get('staff');
 
@@ -229,9 +228,25 @@ class StaffController extends Controller
         $maritalProfile->spouse_occupation = $request->spouse_occupation;
         $maritalProfile->spouse_office = $request->spouse_office;
         $maritalProfile->children_number = $request->children_number;
-        $maritalProfile->children_school = $request->children_school;
         $maritalProfile->save();
 
+
+        // Find the staff member
+        $children = Staff::findOrFail($user->id);
+
+        // Clear the existing academic profiles
+        $children->childrenProfiles()->delete();
+
+        foreach ($request->child_name as $key => $value) {
+            ChildrenProfile::create([
+                'staff_id' => $children->id,
+                'child_name' => $value,
+                'child_school' => $request->child_school[$key],
+                'child_gender' => $request->child_gender[$key],
+                'child_dob' => $request->child_dob[$key],
+
+            ]);
+        }
 
         return to_route('profile')->with('message', 'Marital Status updated successfully.');
     }

@@ -46,6 +46,11 @@ class Staff extends Model
         return $this->hasMany(AcademicProfile::class);
     }
 
+    public function childrenProfiles()
+    {
+        return $this->hasMany(ChildrenProfile::class);
+    }
+
     public function fullname()
     {
         return$this->title. " ". $this->firstname. " ". $this->lastname;
