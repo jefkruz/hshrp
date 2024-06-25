@@ -75,9 +75,9 @@
 
             <li class="nav-item dropdown has-arrow main-drop">
                 <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-							<span class="user-img"><img src="{{session('staff')->profile_pic}}" alt="">
+							<span class="user-img"><img src="{{session('staff')->profile_pic ?? $staff->profile_pic}}" alt="">
 							<span class="status online"></span></span>
-                    <span>{{session('staff')->title}} {{session('staff')->firstname}} {{session('staff')->lastname}}</span>
+                    <span>{{session('staff.title'). ' '. session('staff.firstname') .' '.session('staff.lastname')}} </span>
                 </a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="{{route('profile')}}">My Profile</a>

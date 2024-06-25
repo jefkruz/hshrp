@@ -154,11 +154,18 @@ class PlatformController extends Controller
     public function profile()
     {
 
-        $staff =  Session::get('staff');
 
 
 
         $m = new MenuController();
+        $staff =  Session::get('staff');
+       $staff = Staff::find($staff['id']);
+
+//        if ($staff) {
+//            // Convert the array to an object
+//            $staff = (object) $staff;
+//
+//        }
 
         $department = Department::find($staff->department_id);
         if($staff->is_leader == 'yes'){

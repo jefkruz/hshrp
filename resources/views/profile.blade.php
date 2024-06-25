@@ -10,6 +10,7 @@
                 <div class="col-md-12">
                     <div class="profile-view">
                         <div class="profile-img-wrap">
+
                             <div class="profile-img">
                                 <a href="#"><img alt="" src="{{$staff->profile_pic}}"></a>
                             </div>

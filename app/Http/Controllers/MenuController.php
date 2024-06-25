@@ -11,7 +11,7 @@ class MenuController extends Controller
     {
         $route = Route::currentRouteName();
         if(session('staff')){
-            return $this->staffMenu($route, session('staff')->is_leader);
+            return $this->staffMenu($route, session('staff.is_leader'));
         } else if(session('admin')){
             return $this->adminMenu($route);
         } else if(session('director')){
