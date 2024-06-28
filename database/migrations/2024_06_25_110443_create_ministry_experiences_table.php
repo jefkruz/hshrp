@@ -13,17 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('experience_profiles', function (Blueprint $table) {
+        Schema::create('ministry_experiences', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('staff_id');
-            $table->string('experience')->nullable();
             $table->string('department')->nullable();
-            $table->string('ministry_start_date')->nullable();
-            $table->string('ministry_end_date')->nullable();
-            $table->string('ministry_job_role')->nullable();
+            $table->string('unit')->nullable();
+
+            $table->string('experience')->nullable();
             $table->string('start_date')->nullable();
             $table->string('end_date')->nullable();
-            $table->string('job_role')->nullable();
+            $table->text('job_role')->nullable();
+
             $table->timestamps();
         });
     }
@@ -35,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('experience_profiles');
+        Schema::dropIfExists('ministry_experiences');
     }
 };

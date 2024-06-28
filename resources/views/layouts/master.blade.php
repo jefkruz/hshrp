@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <meta name="description" content="Personnel Management Integrated System">
-    <meta name="keywords" content="healing School, report,hr">
+    <meta name="keywords" content="{{env('DEPARTMENT_NAME')}}, report,hr">
     <meta name="author" content="{{env('DEV')}}">
     <meta name="robots" content="noindex, nofollow">
     <title>{{$page_title}} - HR PORTAL</title>

@@ -36,9 +36,14 @@ class Staff extends Model
     {
         return ParentalProfile::where('staff_id', $this->id)->first();
     }
+    public function ministryWork()
+    {
+        return MinistryExperience::where('staff_id', $this->id)->first();
+    }
+
     public function work()
     {
-        return ExperienceProfile::where('staff_id', $this->id)->first();
+        return MinistryExperience::where('staff_id', $this->id)->first();
     }
 
     public function academicProfiles()

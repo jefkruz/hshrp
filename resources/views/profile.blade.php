@@ -88,7 +88,7 @@
             <div class="col-lg-12 col-md-12 col-sm-12 line-tabs">
                 <ul class="nav nav-tabs nav-tabs-bottom">
                     <li class="nav-item"><a href="#emp_profile" data-toggle="tab" class="nav-link active">Profile</a></li>
-{{--                    <li class="nav-item"><a href="#emp_projects" data-toggle="tab" class="nav-link">Projects</a></li>--}}
+                    <li class="nav-item"><a href="#emp_projects" data-toggle="tab" class="nav-link">Work Experience</a></li>
 {{--                    <li class="nav-item"><a href="#bank_statutory" data-toggle="tab" class="nav-link">Bank & Statutory <small class="text-danger">(Admin Only)</small></a></li>--}}
                 </ul>
             </div>
@@ -406,6 +406,12 @@
 {{--                </div>--}}
 
             </div>
+
+        </div>
+        <!-- /Profile Info Tab -->
+
+        <!-- Projects Tab -->
+        <div class="tab-pane fade" id="emp_projects">
             <div class="row">
 
                 <div class="col-md-6 d-flex">
@@ -453,12 +459,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- /Profile Info Tab -->
-
-        <!-- Projects Tab -->
-        <div class="tab-pane fade" id="emp_projects">
             <div class="row">
+
                 <div class="col-lg-4 col-sm-6 col-md-4 col-xl-3">
                     <div class="card">
                         <div class="card-body">
@@ -1878,7 +1880,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{route('updateNokProfile')}}" enctype="multipart/form-data" method="POST">
+                    <form action="" enctype="multipart/form-data" method="POST">
                         @csrf
                         <div class="card">
                             <div class="card-body">
