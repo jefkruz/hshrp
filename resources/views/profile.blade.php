@@ -164,9 +164,13 @@
                                     <div class="title">Anniversary Date</div>
                                     <div class="text">
 
-                                            {{ $staff->marital()->anniversary ? \Carbon\Carbon::createFromFormat('d/m/Y', $staff->marital()->anniversary)->format('jS F Y') : 'NILL' }}
+                                        @if ($staff->marital && $staff->marital->anniversary)
+                                            {{ \Carbon\Carbon::parse($staff->marital->anniversary)->setTimezone('Africa/Lagos')->format('jS F Y') }}
+                                        @else
+                                            NILL
+                                        @endif
 
-{{--                                            {{ \Carbon\Carbon::parse($staff->marital()->anniversary )->format('j F Y') }}--}}
+                                        {{--                                            {{ \Carbon\Carbon::parse($staff->marital()->anniversary )->format('j F Y') }}--}}
 
                                     </div>
                                 </li>
