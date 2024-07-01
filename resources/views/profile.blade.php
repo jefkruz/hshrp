@@ -164,7 +164,7 @@
                                     <div class="title">Anniversary Date</div>
                                     <div class="text">
 
-                                        @if ($staff->marital && $staff->marital->anniversary)
+                                        @if ($staff->marital() && $staff->marital()->anniversary)
                                             {{ \Carbon\Carbon::parse($staff->marital->anniversary)->setTimezone('Africa/Lagos')->format('jS F Y') }}
                                         @else
                                             NILL
