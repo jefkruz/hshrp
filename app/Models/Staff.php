@@ -48,7 +48,7 @@ class Staff extends Model
 
     public function work()
     {
-        return WorkExperience::where('staff_id', $this->id)->first();
+        return $this->hasMany(WorkExperience::class);
     }
 
     public function academicProfiles()

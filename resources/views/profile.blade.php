@@ -443,6 +443,7 @@
                             <h3 class="card-title">External Work Experience <a href="#" class="edit-icon" data-toggle="modal" data-target="#experience_info"><i class="fa fa-pencil"></i></a></h3>
                             <div class="experience-box">
                                 <ul class="experience-list">
+                                    {{$staff->work()}}
                                     @if($staff->work())
                                     @foreach($staff->work() as $work)
                                     <li>
@@ -1716,7 +1717,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="" enctype="multipart/form-data" method="POST">
+                    <form action="{{route('updateWorkProfile')}}"  method="POST">
                         @csrf
                         <div class="card">
                             <div class="card-body">
@@ -1733,49 +1734,64 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row" id="showWork">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label>Organization Name <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" name="company" required value="{{$staff->work()->company ?? ''}}">
 
-                                        </div>
-                                    </div>
+                                <div id="showWork" style="display: none">
+                                    <div class="card work-card">
+                                        <div class="card-body">
+                                            <h3 class="card-title"> <a href="#" class="delete-icon" onclick="removeCard(this)"><i class="fa fa-trash-o"></i></a></h3>
+                                            <div class="row">
 
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Unit/Dapartment <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" name="unit" required value="{{$staff->work()->unit ?? ''}}">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label>Organization Name <span class="text-danger">*</span></label>
+                                                        <input type="text" class="form-control" name="company[]" required value="">
 
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Job Role <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" name="job_role" required value="{{$staff->work()->job_role ?? ''}}">
+                                                    </div>
+                                                </div>
 
-                                        </div>
-                                    </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Unit/Dapartment </label>
+                                                        <input type="text" class="form-control" name="unit[]"  value="">
 
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>From <span class="text-danger">*</span></label>
-                                            <div class="cal-icon">
-                                                <input type="text" class="date-mask form-control " name="start_date"   value="{{$staff->work()->start_date ??''}}" >
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Job Role <span class="text-danger">*</span></label>
+                                                        <input type="text" class="form-control" name="job_role[]" required value="">
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>From <span class="text-danger">*</span></label>
+                                                        <div class="cal-icon">
+                                                            <input type="text" class="date-mask form-control " name="start_date[]"   value="" >
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>To <span class="text-danger">*</span></label>
+
+                                                        <div class="cal-icon">
+                                                            <input type="text" class="date-mask form-control " name="end_date[]"   value="" >
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                             </div>
+
                                         </div>
 
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>To <span class="text-danger">*</span></label>
 
-                                            <div class="cal-icon">
-                                                <input type="text" class="date-mask form-control " name="end_date"   value="{{$staff->work()->end_date ??''}}" >
-                                            </div>
-                                        </div>
-                                    </div>
-
+                                </div>
+                                <div class="add-more" id="add-more-work" style="display: none">
+                                    <a href="#" id="addWork"><i class="fa fa-plus-circle"></i> Add More</a>
                                 </div>
                             </div>
                         </div>
@@ -2006,6 +2022,19 @@
 
                 }
             });
+            $('#workExperience').change(function() {
+                var work = $(this).val();
+                if (work === 'Yes') {
+                    $('#showWork').show();
+                    $('#add-more-work').show();
+
+                } else if (work === 'No') {
+                    $('#showWork').hide();
+                    $('#add-more-work').hide();
+
+                }
+            });
+
             $('#parentsBornAgain').change(function() {
                 var set = $(this).val();
                 if (set === 'Yes') {
@@ -2120,6 +2149,7 @@
             initializeDatepicker();
         });
     </script>
+
             <script>
                 document.getElementById('addMore').addEventListener('click', function (event) {
                     event.preventDefault();
@@ -2179,6 +2209,78 @@
                 });
             </script>
 
+            <script>
+                document.getElementById('addWork').addEventListener('click', function (event) {
+                    event.preventDefault();
+                    addMoreWork();
+                });
 
+                function addMoreWork() {
+                    const newWorkCard = `
+            <div class="card work-card">
+                <div class="card-body">
+                    <h3 class="card-title">Work Experience <a href="#" class="delete-icon" onclick="removeCard(this)"><i class="fa fa-trash-o"></i></a></h3>
+                    <div class="row">
+                           <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label>Organization Name <span class="text-danger">*</span></label>
+                                                        <input type="text" class="form-control" name="company[]" required value="">
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Unit/Dapartment </label>
+                                                        <input type="text" class="form-control" name="unit[]"  value="">
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Job Role <span class="text-danger">*</span></label>
+                                                        <input type="text" class="form-control" name="job_role[]" required value="">
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>From <span class="text-danger">*</span></label>
+                                                        <div class="cal-icon">
+                                                            <input type="text" class="date-mask form-control " name="start_date[]"   value="" >
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>To <span class="text-danger">*</span></label>
+
+                                                        <div class="cal-icon">
+                                                            <input type="text" class="date-mask form-control " name="end_date[]"   value="" >
+                                                        </div>
+                                                    </div>
+                                                </div>
+                    </div>
+                </div>
+            </div>`;
+                    document.getElementById('showWork').insertAdjacentHTML('beforeend', newWorkCard);
+                    initializeDateMask();
+                }
+
+                function removeCard(element) {
+                    element.closest('.card').remove();
+                }
+
+                function initializeDateMask() {
+                    $.mask.definitions['~'] = '[+-]';
+                    $('.date-mask').mask('99/99/9999');
+                }
+
+                $(document).ready(function() {
+                    initializeDateMask();
+                });
+            </script>
 
 @endsection

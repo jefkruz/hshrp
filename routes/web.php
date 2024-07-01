@@ -69,6 +69,7 @@ Route::group(['middleware' => 'isStaff'], function(){
     Route::post('profile/parental/update', [StaffController::class, 'updateParentalProfile'])->name('updateParentalProfile');
     Route::post('profile/medical/update', [StaffController::class, 'updateMedicalProfile'])->name('updateMedicalProfile');
     Route::post('profile/education/update', [StaffController::class, 'updateEducationProfile'])->name('updateEducationProfile');
+    Route::post('profile/work/update', [StaffController::class, 'updateWorkProfile'])->name('updateWorkProfile');
 });
 
 Route::group(['middleware' => 'isAdmin', 'prefix' => 'admin'], function(){

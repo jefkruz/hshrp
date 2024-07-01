@@ -14,7 +14,8 @@ use App\Models\ParentalProfile;
 use App\Models\Project;
 use App\Models\ProjectTeam;
 use App\Models\Staff;
-use App\Models\StaffSessionData;
+
+use App\Models\WorkExperience;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -397,7 +398,9 @@ class StaffController extends Controller
         $staff = Staff::findOrFail($user->id);
 
         // Clear the existing academic profiles
-        $staff->academicProfiles()->delete();
+
+            $staff->academicProfiles()->delete();
+
 
         // Save each education detail
         foreach ($request->institution as $key => $value) {
@@ -422,6 +425,49 @@ class StaffController extends Controller
         Session::put('staff', $mergedData);
 
         return redirect()->back()->with('message', 'Education profile updated successfully!');
+    }
+
+    public function updateWorkProfile(Request $request)
+    {
+
+        if ($request->experience == 'Yes' ){
+            $request->validate([
+                'company.*' => 'required',
+                'start_date.*' => 'required',
+                'end_date.*' => 'required',
+                'job_role.*' => 'required',
+            ]);
+        }
+
+        $user = Session::get('staff');
+        // Find the staff member
+        $staff = Staff::findOrFail($user->id);
+
+            $staff->work()->delete();
+
+
+        foreach ($request->company as $key => $value) {
+            WorkExperience::create([
+                'staff_id' => $staff->id,
+                'company' => $value,
+                'unit' => $request->unit[$key],
+                'start_date' => $request->start_date[$key],
+                'end_date' => $request->end_date[$key],
+                'job_role' => $request->job_role[$key],
+
+            ]);
+        }
+
+        $updatedStaff = Staff::with('work')->findOrFail($user->id);
+
+        // Merge the existing staff data with the updated education profile data
+        $mergedData = $user->toArray();
+        $mergedData['work'] = $updatedStaff->work;
+
+        // Update the session with the merged data
+        Session::put('staff', $mergedData);
+
+        return to_route('profile')->with('message', 'Work profile updated successfully!');
     }
 
 }
