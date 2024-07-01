@@ -221,8 +221,9 @@
 
 
                                 </ul>
-                                    @endif
+
                             </div>
+                            @endif
                         </div>
                     </div>
                 </div>
