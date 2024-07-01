@@ -38,12 +38,12 @@ class Staff extends Model
     }
     public function ministryWork()
     {
-        return MinistryExperience::where('staff_id', $this->id)->first();
+        return $this->hasMany(MinistryExperience::class);
     }
 
     public function departmentWork()
     {
-        return DepartmentExperience::where('staff_id', $this->id)->first();
+        return $this->hasMany(DepartmentExperience::class);
     }
 
     public function work()

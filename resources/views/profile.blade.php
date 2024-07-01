@@ -443,9 +443,9 @@
                             <h3 class="card-title">External Work Experience <a href="#" class="edit-icon" data-toggle="modal" data-target="#experience_info"><i class="fa fa-pencil"></i></a></h3>
                             <div class="experience-box">
                                 <ul class="experience-list">
-                                    {{$staff->work()}}
-                                    @if($staff->work())
-                                    @foreach($staff->work() as $work)
+
+                                    @if($staff->work)
+                                    @foreach($staff->work as $work)
                                     <li>
                                         <div class="experience-user">
                                             <div class="before-circle"></div>
@@ -470,39 +470,22 @@
                             <h3 class="card-title">Ministry Work Experience <a href="#" class="edit-icon" data-toggle="modal" data-target="#ministry_experience_info"><i class="fa fa-pencil"></i></a></h3>
                             <div class="experience-box">
                                 <ul class="experience-list">
-                                    <li>
-                                        <div class="experience-user">
-                                            <div class="before-circle"></div>
-                                        </div>
-                                        <div class="experience-content">
-                                            <div class="timeline-content">
-                                                <a href="#/" class="name">Web Designer at Zen Corporation</a>
-                                                <span class="time">Jan 2013 - Present (5 years 2 months)</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="experience-user">
-                                            <div class="before-circle"></div>
-                                        </div>
-                                        <div class="experience-content">
-                                            <div class="timeline-content">
-                                                <a href="#/" class="name">Web Designer at Ron-tech</a>
-                                                <span class="time">Jan 2013 - Present (5 years 2 months)</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="experience-user">
-                                            <div class="before-circle"></div>
-                                        </div>
-                                        <div class="experience-content">
-                                            <div class="timeline-content">
-                                                <a href="#/" class="name">Web Designer at Dalt Technology</a>
-                                                <span class="time">Jan 2013 - Present (5 years 2 months)</span>
-                                            </div>
-                                        </div>
-                                    </li>
+                                    @if($staff->ministryWork)
+                                        @foreach($staff->ministryWork as $work)
+                                            <li>
+                                                <div class="experience-user">
+                                                    <div class="before-circle"></div>
+                                                </div>
+                                                <div class="experience-content">
+                                                    <div class="timeline-content">
+                                                        <a href="#/" class="name">{{ucwords($work->job_role)}} at {{ucwords($work->company)}}</a>
+                                                        <span class="time">{{$work->start_date}} - {{$work->end_date}} </span>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        @endforeach
+                                    @endif
+
                                 </ul>
                             </div>
                         </div>
@@ -514,39 +497,21 @@
                             <h3 class="card-title">Healing School Work Experience <a href="#" class="edit-icon" data-toggle="modal" data-target="#department_experience_info"><i class="fa fa-pencil"></i></a></h3>
                             <div class="experience-box">
                                 <ul class="experience-list">
-                                    <li>
-                                        <div class="experience-user">
-                                            <div class="before-circle"></div>
-                                        </div>
-                                        <div class="experience-content">
-                                            <div class="timeline-content">
-                                                <a href="#/" class="name">Web Designer at Zen Corporation</a>
-                                                <span class="time">Jan 2013 - Present (5 years 2 months)</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="experience-user">
-                                            <div class="before-circle"></div>
-                                        </div>
-                                        <div class="experience-content">
-                                            <div class="timeline-content">
-                                                <a href="#/" class="name">Web Designer at Ron-tech</a>
-                                                <span class="time">Jan 2013 - Present (5 years 2 months)</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="experience-user">
-                                            <div class="before-circle"></div>
-                                        </div>
-                                        <div class="experience-content">
-                                            <div class="timeline-content">
-                                                <a href="#/" class="name">Web Designer at Dalt Technology</a>
-                                                <span class="time">Jan 2013 - Present (5 years 2 months)</span>
-                                            </div>
-                                        </div>
-                                    </li>
+                                    @if($staff->departmentWork)
+                                        @foreach($staff->departmentWork as $work)
+                                            <li>
+                                                <div class="experience-user">
+                                                    <div class="before-circle"></div>
+                                                </div>
+                                                <div class="experience-content">
+                                                    <div class="timeline-content">
+                                                        <a href="#/" class="name">{{ucwords($work->job_role)}} at {{ucwords($work->company)}}</a>
+                                                        <span class="time">{{$work->start_date}} - {{$work->end_date}} </span>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        @endforeach
+                                    @endif
                                 </ul>
                             </div>
                         </div>
