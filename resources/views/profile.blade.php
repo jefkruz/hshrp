@@ -163,13 +163,11 @@
                                 <li>
                                     <div class="title">Anniversary Date</div>
                                     <div class="text">
-                                        @if($staff->marital() && $staff->marital()->martial_status == 'Married' )
+
                                             {{ $staff->marital()->anniversary ? \Carbon\Carbon::createFromFormat('d/m/Y', $staff->marital()->anniversary)->format('jS F Y') : 'NILL' }}
 
 {{--                                            {{ \Carbon\Carbon::parse($staff->marital()->anniversary )->format('j F Y') }}--}}
-                                            @else
-                                           NILL
-                                    @endif
+
                                     </div>
                                 </li>
                                 <li>
