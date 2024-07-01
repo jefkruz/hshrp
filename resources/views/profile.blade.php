@@ -1776,91 +1776,91 @@
             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Work Information</h5>
+                        <h5 class="modal-title">Ministry Work Information</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="" enctype="multipart/form-data" method="POST">
+                        <form action="{{route('updateMinistryWorkProfile')}}" enctype="multipart/form-data" method="POST">
                             @csrf
                             <div class="card">
                                 <div class="card-body">
-                                    <h3 class="card-title">Work Experience in Ministry</h3>
+                                    <h3 class="card-title">Ministry Work Experience</h3>
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>Do you have any work experience in the Loveworld nation</label>
-                                                <select class=" select form-control"  id="workExperience" required name="experience">
+                                                <label>Do you have any work experience in other Ministry Departments? </label>
+                                                <select class=" select form-control"  id="ministryWorkExperience" required name="experience">
                                                     <option>--Select--</option>
-                                                    <option  value="Yes" {{ $staff->work()->experience ?? '' == 'Yes' ? 'selected' : '' }}>Yes</option>
-                                                    <option  value="No" {{ $staff->work()->experiencee ?? '' == 'No' ? 'selected' : '' }}>No</option>
+                                                    <option  value="Yes" {{ $staff->ministryWork()->experience ?? '' == 'Yes' ? 'selected' : '' }}>Yes</option>
+                                                    <option  value="No" {{ $staff->ministryWork()->experiencee ?? '' == 'No' ? 'selected' : '' }}>No</option>
                                                 </select>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row" id="showWork">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>From <span class="text-danger">*</span></label>
-                                                <div class="cal-icon">
-                                                    <input type="text" class="form-control floating mydatetimepicker" name="start_date"   value="{{$staff->work()->ministry_start_date ??''}}" >
+
+                                    <div id="showMinistryWork" style="display: none">
+                                        <div class="card ministry-work-card">
+                                            <div class="card-body">
+                                                <h3 class="card-title"> <a href="#" class="delete-icon" onclick="removeCard(this)"><i class="fa fa-trash-o"></i></a></h3>
+                                                <div class="row">
+
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label>Department Name <span class="text-danger">*</span></label>
+                                                            <input type="text" class="form-control" name="company[]" required value="">
+
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>Unit </label>
+                                                            <input type="text" class="form-control" name="unit[]"  value="">
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>Job Role <span class="text-danger">*</span></label>
+                                                            <input type="text" class="form-control" name="job_role[]" required value="">
+
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>From <span class="text-danger">*</span></label>
+                                                            <div class="cal-icon">
+                                                                <input type="text" class="date-mask form-control " name="start_date[]"   value="" >
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>To <span class="text-danger">*</span></label>
+
+                                                            <div class="cal-icon">
+                                                                <input type="text" class="date-mask form-control " name="end_date[]"   value="" >
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
                                                 </div>
+
                                             </div>
 
                                         </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>To <span class="text-danger">*</span></label>
 
-                                                <input type="text" class="form-control " name="end_date"   value="{{$staff->work()->ministry_end_date ?? ''}}" >
-
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>Job Role <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" name="job_role" required value="{{$staff->work()->ministry_job_role ?? ''}}">
-
-                                            </div>
-                                        </div>
-
+                                    </div>
+                                    <div class="add-more" id="add-ministry-work" style="display: none">
+                                        <a href="#" id="addMinistryWork"><i class="fa fa-plus-circle"></i> Add More</a>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="card">
-                                <div class="card-body">
-                                    <h3 class="card-title">Work History in Healing School</h3>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>From <span class="text-danger">*</span></label>
-                                                <div class="cal-icon">
-                                                    <input type="text" class="form-control floating mydatetimepicker" name="start_date"   value="{{$staff->work()->start_date ??''}}" >
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>Too <span class="text-danger">*</span></label>
-                                                <div class="cal-icon">
-                                                    <input type="text" class="form-control floating mydatetimepicker" name="end_date"   value="{{$staff->work()->end_date ?? ''}}" >
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>Job Role <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" name="job_role" required value="{{$staff->work()->job_role ?? ''}}">
-
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
                             <div class="submit-section">
                                 <button class="btn btn-primary submit-btn">Submit</button>
                             </div>
@@ -1987,6 +1987,19 @@
 
                 }
             });
+            $('#ministryWorkExperience').change(function() {
+                var ministry = $(this).val();
+                if (ministry === 'Yes') {
+                    $('#showMinistryWork').show();
+                    $('#add-ministry-work').show();
+
+                } else if (ministry === 'No') {
+                    $('#showMinistryWork').hide();
+                    $('#add-ministry-work').hide();
+
+                }
+            });
+
             $('#workExperience').change(function() {
                 var work = $(this).val();
                 if (work === 'Yes') {
@@ -2231,6 +2244,80 @@
                 </div>
             </div>`;
                     document.getElementById('showWork').insertAdjacentHTML('beforeend', newWorkCard);
+                    initializeDateMask();
+                }
+
+                function removeCard(element) {
+                    element.closest('.card').remove();
+                }
+
+                function initializeDateMask() {
+                    $.mask.definitions['~'] = '[+-]';
+                    $('.date-mask').mask('99/99/9999');
+                }
+
+                $(document).ready(function() {
+                    initializeDateMask();
+                });
+            </script>
+
+            <script>
+                document.getElementById('addMinistryWork').addEventListener('click', function (event) {
+                    event.preventDefault();
+                    addMinistryWork();
+                });
+
+                function addMinistryWork() {
+                    const newMinistryWorkCard = `
+            <div class="card ministry-work-card">
+                <div class="card-body">
+                    <h3 class="card-title">Work Experience <a href="#" class="delete-icon" onclick="removeCard(this)"><i class="fa fa-trash-o"></i></a></h3>
+                    <div class="row">
+                           <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label>Department Name <span class="text-danger">*</span></label>
+                                                        <input type="text" class="form-control" name="company[]" required value="">
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Unit </label>
+                                                        <input type="text" class="form-control" name="unit[]"  value="">
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Job Role <span class="text-danger">*</span></label>
+                                                        <input type="text" class="form-control" name="job_role[]" required value="">
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>From <span class="text-danger">*</span></label>
+                                                        <div class="cal-icon">
+                                                            <input type="text" class="date-mask form-control " name="start_date[]"   value="" >
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>To <span class="text-danger">*</span></label>
+
+                                                        <div class="cal-icon">
+                                                            <input type="text" class="date-mask form-control " name="end_date[]"   value="" >
+                                                        </div>
+                                                    </div>
+                                                </div>
+                    </div>
+                </div>
+            </div>`;
+                    document.getElementById('showMinistryWork').insertAdjacentHTML('beforeend', newMinistryWorkCard);
                     initializeDateMask();
                 }
 
