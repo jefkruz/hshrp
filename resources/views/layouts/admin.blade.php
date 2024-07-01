@@ -38,7 +38,7 @@
 
     @yield('style')
 </head>
-<body>
+<body >
 <!-- Main Wrapper -->
 <div class="main-wrapper">
 

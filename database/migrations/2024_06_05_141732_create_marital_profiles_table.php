@@ -24,7 +24,6 @@ return new class extends Migration
             $table->string('spouse_occupation')->nullable();
             $table->string('spouse_office')->nullable();
             $table->string('children_number')->nullable();
-            $table->string('children_school')->nullable();
             $table->timestamps();
         });
     }

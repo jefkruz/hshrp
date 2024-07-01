@@ -41,9 +41,14 @@ class Staff extends Model
         return MinistryExperience::where('staff_id', $this->id)->first();
     }
 
+    public function departmentWork()
+    {
+        return DepartmentExperience::where('staff_id', $this->id)->first();
+    }
+
     public function work()
     {
-        return MinistryExperience::where('staff_id', $this->id)->first();
+        return WorkExperience::where('staff_id', $this->id)->first();
     }
 
     public function academicProfiles()

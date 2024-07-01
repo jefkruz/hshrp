@@ -110,6 +110,7 @@ Route::group(['middleware' => 'isDirector', 'prefix' => 'director'], function(){
     Route::get('goal/{id}', [AdminController::class, 'viewGoal'])->name('director.viewGoal');
     Route::post('staff/appraisal', [AppraisalController::class, 'submitAppraisal'])->name('director.submitAppraisal');
 });
+
  Route::get('change/password', [DashboardController::class, 'changePassword'])->name('changePassword');
  Route::post('update/password', [DashboardController::class, 'updatePassword'])->name('updatePassword');
 

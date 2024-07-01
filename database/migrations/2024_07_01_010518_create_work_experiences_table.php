@@ -13,13 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('ministry_experiences', function (Blueprint $table) {
+        Schema::create('work_experiences', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('staff_id');
-            $table->string('department')->nullable();
+            $table->string('experience')->nullable();
+            $table->string('company')->nullable();
             $table->string('unit')->nullable();
             $table->text('job_role')->nullable();
-            $table->string('experience')->nullable();
             $table->string('start_date')->nullable();
             $table->string('end_date')->nullable();
 
@@ -35,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ministry_experiences');
+        Schema::dropIfExists('work_experiences');
     }
 };

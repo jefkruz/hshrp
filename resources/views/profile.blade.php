@@ -196,11 +196,31 @@
                                     <div class="title">Number of Children</div>
                                     <div class="text">{{$staff->marital()->children_number ?? 'NILL'}}</div>
                                 </li>
-                                <li>
-                                    <div class="title">Children School</div>
-                                    <div class="text">{{$staff->marital()->children_school ?? 'NILL'}}</div>
-                                </li>
+
                             </ul>
+                            @if($staff->childrenProfiles->count() > 0)
+                            <h3 class="card-title">Children Information</h3>
+                                <div class="experience-box">
+                                <ul class="experience-list">
+                                    @foreach ($staff->childrenProfiles as $child)
+                                        <li>
+                                            <div class="experience-user">
+                                                <div class="before-circle"></div>
+                                            </div>
+                                            <div class="experience-content">
+                                                <div class="timeline-content">
+                                                    <a href="#/" class="name">Fullname: {{ucwords($child->child_name)}} </a><br>
+                                                    <a href="#/" class="name">School: {{ucwords($child->child_school)}} </a>
+                                                    <span class="time"><strong>D.O.B: </strong> {{ $child->child_dob}} ({{strtoupper($child->child_gender)}})</span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    @endforeach
+
+
+                                </ul>
+                                    @endif
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -417,7 +437,7 @@
                 <div class="col-md-6 d-flex">
                     <div class="card profile-box flex-fill">
                         <div class="card-body">
-                            <h3 class="card-title">Ministry Work Experience <a href="#" class="edit-icon" data-toggle="modal" data-target="#experience_info"><i class="fa fa-pencil"></i></a></h3>
+                            <h3 class="card-title">External Work Experience <a href="#" class="edit-icon" data-toggle="modal" data-target="#experience_info"><i class="fa fa-pencil"></i></a></h3>
                             <div class="experience-box">
                                 <ul class="experience-list">
                                     <li>
@@ -458,261 +478,97 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-6 d-flex">
+                    <div class="card profile-box flex-fill">
+                        <div class="card-body">
+                            <h3 class="card-title">Ministry Work Experience <a href="#" class="edit-icon" data-toggle="modal" data-target="#ministry_experience_info"><i class="fa fa-pencil"></i></a></h3>
+                            <div class="experience-box">
+                                <ul class="experience-list">
+                                    <li>
+                                        <div class="experience-user">
+                                            <div class="before-circle"></div>
+                                        </div>
+                                        <div class="experience-content">
+                                            <div class="timeline-content">
+                                                <a href="#/" class="name">Web Designer at Zen Corporation</a>
+                                                <span class="time">Jan 2013 - Present (5 years 2 months)</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="experience-user">
+                                            <div class="before-circle"></div>
+                                        </div>
+                                        <div class="experience-content">
+                                            <div class="timeline-content">
+                                                <a href="#/" class="name">Web Designer at Ron-tech</a>
+                                                <span class="time">Jan 2013 - Present (5 years 2 months)</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="experience-user">
+                                            <div class="before-circle"></div>
+                                        </div>
+                                        <div class="experience-content">
+                                            <div class="timeline-content">
+                                                <a href="#/" class="name">Web Designer at Dalt Technology</a>
+                                                <span class="time">Jan 2013 - Present (5 years 2 months)</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 d-flex">
+                    <div class="card profile-box flex-fill">
+                        <div class="card-body">
+                            <h3 class="card-title">Healing School Work Experience <a href="#" class="edit-icon" data-toggle="modal" data-target="#department_experience_info"><i class="fa fa-pencil"></i></a></h3>
+                            <div class="experience-box">
+                                <ul class="experience-list">
+                                    <li>
+                                        <div class="experience-user">
+                                            <div class="before-circle"></div>
+                                        </div>
+                                        <div class="experience-content">
+                                            <div class="timeline-content">
+                                                <a href="#/" class="name">Web Designer at Zen Corporation</a>
+                                                <span class="time">Jan 2013 - Present (5 years 2 months)</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="experience-user">
+                                            <div class="before-circle"></div>
+                                        </div>
+                                        <div class="experience-content">
+                                            <div class="timeline-content">
+                                                <a href="#/" class="name">Web Designer at Ron-tech</a>
+                                                <span class="time">Jan 2013 - Present (5 years 2 months)</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="experience-user">
+                                            <div class="before-circle"></div>
+                                        </div>
+                                        <div class="experience-content">
+                                            <div class="timeline-content">
+                                                <a href="#/" class="name">Web Designer at Dalt Technology</a>
+                                                <span class="time">Jan 2013 - Present (5 years 2 months)</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-            <div class="row">
 
-                <div class="col-lg-4 col-sm-6 col-md-4 col-xl-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="dropdown profile-action">
-                                <a aria-expanded="false" data-toggle="dropdown" class="action-icon dropdown-toggle" href="#"><i class="material-icons">more_vert</i></a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a data-target="#edit_project" data-toggle="modal" href="#" class="dropdown-item"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                    <a data-target="#delete_project" data-toggle="modal" href="#" class="dropdown-item"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-                                </div>
-                            </div>
-                            <h4 class="project-title"><a href="project-view.html">Office Management</a></h4>
-                            <small class="block text-ellipsis m-b-15">
-                                <span class="text-xs">1</span> <span class="text-muted">open tasks, </span>
-                                <span class="text-xs">9</span> <span class="text-muted">tasks completed</span>
-                            </small>
-                            <p class="text-muted">Lorem Ipsum is simply dummy text of the printing and
-                                typesetting industry. When an unknown printer took a galley of type and
-                                scrambled it...
-                            </p>
-                            <div class="pro-deadline m-b-15">
-                                <div class="sub-title">
-                                    Deadline:
-                                </div>
-                                <div class="text-muted">
-                                    17 Apr 2019
-                                </div>
-                            </div>
-                            <div class="project-members m-b-15">
-                                <div>Project Leader :</div>
-                                <ul class="team-members">
-                                    <li>
-                                        <a href="#" data-toggle="tooltip" title="Jeffery Lalor"><img alt="" src="assets/img/profiles/avatar-16.jpg"></a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="project-members m-b-15">
-                                <div>Team :</div>
-                                <ul class="team-members">
-                                    <li>
-                                        <a href="#" data-toggle="tooltip" title="John Doe"><img alt="" src="assets/img/profiles/avatar-02.jpg"></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" data-toggle="tooltip" title="Richard Miles"><img alt="" src="assets/img/profiles/avatar-09.jpg"></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" data-toggle="tooltip" title="John Smith"><img alt="" src="assets/img/profiles/avatar-10.jpg"></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" data-toggle="tooltip" title="Mike Litorus"><img alt="" src="assets/img/profiles/avatar-05.jpg"></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="all-users">+15</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <p class="m-b-5">Progress <span class="text-success float-right">40%</span></p>
-                            <div class="progress progress-xs mb-0">
-                                <div style="width: 40%" title="" data-toggle="tooltip" role="progressbar" class="progress-bar bg-success" data-original-title="40%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-sm-6 col-md-4 col-xl-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="dropdown profile-action">
-                                <a aria-expanded="false" data-toggle="dropdown" class="action-icon dropdown-toggle" href="#"><i class="material-icons">more_vert</i></a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a data-target="#edit_project" data-toggle="modal" href="#" class="dropdown-item"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                    <a data-target="#delete_project" data-toggle="modal" href="#" class="dropdown-item"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-                                </div>
-                            </div>
-                            <h4 class="project-title"><a href="project-view.html">Project Management</a></h4>
-                            <small class="block text-ellipsis m-b-15">
-                                <span class="text-xs">2</span> <span class="text-muted">open tasks, </span>
-                                <span class="text-xs">5</span> <span class="text-muted">tasks completed</span>
-                            </small>
-                            <p class="text-muted">Lorem Ipsum is simply dummy text of the printing and
-                                typesetting industry. When an unknown printer took a galley of type and
-                                scrambled it...
-                            </p>
-                            <div class="pro-deadline m-b-15">
-                                <div class="sub-title">
-                                    Deadline:
-                                </div>
-                                <div class="text-muted">
-                                    17 Apr 2019
-                                </div>
-                            </div>
-                            <div class="project-members m-b-15">
-                                <div>Project Leader :</div>
-                                <ul class="team-members">
-                                    <li>
-                                        <a href="#" data-toggle="tooltip" title="Jeffery Lalor"><img alt="" src="assets/img/profiles/avatar-16.jpg"></a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="project-members m-b-15">
-                                <div>Team :</div>
-                                <ul class="team-members">
-                                    <li>
-                                        <a href="#" data-toggle="tooltip" title="John Doe"><img alt="" src="assets/img/profiles/avatar-02.jpg"></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" data-toggle="tooltip" title="Richard Miles"><img alt="" src="assets/img/profiles/avatar-09.jpg"></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" data-toggle="tooltip" title="John Smith"><img alt="" src="assets/img/profiles/avatar-10.jpg"></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" data-toggle="tooltip" title="Mike Litorus"><img alt="" src="assets/img/profiles/avatar-05.jpg"></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="all-users">+15</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <p class="m-b-5">Progress <span class="text-success float-right">40%</span></p>
-                            <div class="progress progress-xs mb-0">
-                                <div style="width: 40%" title="" data-toggle="tooltip" role="progressbar" class="progress-bar bg-success" data-original-title="40%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-sm-6 col-md-4 col-xl-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="dropdown profile-action">
-                                <a aria-expanded="false" data-toggle="dropdown" class="action-icon dropdown-toggle" href="#"><i class="material-icons">more_vert</i></a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a data-target="#edit_project" data-toggle="modal" href="#" class="dropdown-item"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                    <a data-target="#delete_project" data-toggle="modal" href="#" class="dropdown-item"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-                                </div>
-                            </div>
-                            <h4 class="project-title"><a href="project-view.html">Video Calling App</a></h4>
-                            <small class="block text-ellipsis m-b-15">
-                                <span class="text-xs">3</span> <span class="text-muted">open tasks, </span>
-                                <span class="text-xs">3</span> <span class="text-muted">tasks completed</span>
-                            </small>
-                            <p class="text-muted">Lorem Ipsum is simply dummy text of the printing and
-                                typesetting industry. When an unknown printer took a galley of type and
-                                scrambled it...
-                            </p>
-                            <div class="pro-deadline m-b-15">
-                                <div class="sub-title">
-                                    Deadline:
-                                </div>
-                                <div class="text-muted">
-                                    17 Apr 2019
-                                </div>
-                            </div>
-                            <div class="project-members m-b-15">
-                                <div>Project Leader :</div>
-                                <ul class="team-members">
-                                    <li>
-                                        <a href="#" data-toggle="tooltip" title="Jeffery Lalor"><img alt="" src="assets/img/profiles/avatar-16.jpg"></a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="project-members m-b-15">
-                                <div>Team :</div>
-                                <ul class="team-members">
-                                    <li>
-                                        <a href="#" data-toggle="tooltip" title="John Doe"><img alt="" src="assets/img/profiles/avatar-02.jpg"></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" data-toggle="tooltip" title="Richard Miles"><img alt="" src="assets/img/profiles/avatar-09.jpg"></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" data-toggle="tooltip" title="John Smith"><img alt="" src="assets/img/profiles/avatar-10.jpg"></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" data-toggle="tooltip" title="Mike Litorus"><img alt="" src="assets/img/profiles/avatar-05.jpg"></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="all-users">+15</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <p class="m-b-5">Progress <span class="text-success float-right">40%</span></p>
-                            <div class="progress progress-xs mb-0">
-                                <div style="width: 40%" title="" data-toggle="tooltip" role="progressbar" class="progress-bar bg-success" data-original-title="40%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-sm-6 col-md-4 col-xl-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="dropdown profile-action">
-                                <a aria-expanded="false" data-toggle="dropdown" class="action-icon dropdown-toggle" href="#"><i class="material-icons">more_vert</i></a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a data-target="#edit_project" data-toggle="modal" href="#" class="dropdown-item"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                    <a data-target="#delete_project" data-toggle="modal" href="#" class="dropdown-item"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-                                </div>
-                            </div>
-                            <h4 class="project-title"><a href="project-view.html">Hospital Administration</a></h4>
-                            <small class="block text-ellipsis m-b-15">
-                                <span class="text-xs">12</span> <span class="text-muted">open tasks, </span>
-                                <span class="text-xs">4</span> <span class="text-muted">tasks completed</span>
-                            </small>
-                            <p class="text-muted">Lorem Ipsum is simply dummy text of the printing and
-                                typesetting industry. When an unknown printer took a galley of type and
-                                scrambled it...
-                            </p>
-                            <div class="pro-deadline m-b-15">
-                                <div class="sub-title">
-                                    Deadline:
-                                </div>
-                                <div class="text-muted">
-                                    17 Apr 2019
-                                </div>
-                            </div>
-                            <div class="project-members m-b-15">
-                                <div>Project Leader :</div>
-                                <ul class="team-members">
-                                    <li>
-                                        <a href="#" data-toggle="tooltip" title="Jeffery Lalor"><img alt="" src="assets/img/profiles/avatar-16.jpg"></a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="project-members m-b-15">
-                                <div>Team :</div>
-                                <ul class="team-members">
-                                    <li>
-                                        <a href="#" data-toggle="tooltip" title="John Doe"><img alt="" src="assets/img/profiles/avatar-02.jpg"></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" data-toggle="tooltip" title="Richard Miles"><img alt="" src="assets/img/profiles/avatar-09.jpg"></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" data-toggle="tooltip" title="John Smith"><img alt="" src="assets/img/profiles/avatar-10.jpg"></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" data-toggle="tooltip" title="Mike Litorus"><img alt="" src="assets/img/profiles/avatar-05.jpg"></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="all-users">+15</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <p class="m-b-5">Progress <span class="text-success float-right">40%</span></p>
-                            <div class="progress progress-xs mb-0">
-                                <div style="width: 40%" title="" data-toggle="tooltip" role="progressbar" class="progress-bar bg-success" data-original-title="40%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
         <!-- /Projects Tab -->
 
@@ -1259,7 +1115,7 @@
                                         <div class="form-group">
                                             <label>Anniversary Date</label>
                                             <div class="cal-icon">
-                                                <input type="text"  name="anniversary" class="date-mask form-control ">
+                                                <input type="text"  name="anniversary" class="date-mask form-control" value="{{$staff->marital()->anniversary ?? ''}}">
 
                                             </div>
                                         </div>
@@ -1300,12 +1156,7 @@
                                             <input class="form-control"  name="children_number"  value="{{$staff->marital()->children_number ?? ''}}" type="number">
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Children School</label>
-                                            <input class="form-control"  name="children_school"  value="{{$staff->marital()->children_school ?? ''}}" type="text">
-                                        </div>
-                                    </div>
+
 
 
                                 </div>
@@ -1782,9 +1633,9 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group form-focus focused">
                                                             <div class="cal-icon">
-                                                                <input type="text" class="date-mask form-control " name="complete_date[]" value="{{ $academic->complete_date }}">
+                                                                <input type="text" class="form-control " name="complete_date[]" value="{{ $academic->complete_date }}">
                                                             </div>
-                                                            <label class="focus-label">Complete Date<span class="text-danger"> (dd/mm/yyyy)</span></label>
+                                                            <label class="focus-label">Complete Date<span class="text-danger"> (indicate if still active)</span></label>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
@@ -1830,9 +1681,9 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group form-focus focused">
                                                         <div class="cal-icon">
-                                                            <input type="text" class="date-mask form-control " name="complete_date[]">
+                                                            <input type="text" class="form-control " name="complete_date[]">
                                                         </div>
-                                                        <label class="focus-label">Complete Date<span class="text-danger"> (dd/mm/yyyy)</span></label>
+                                                        <label class="focus-label">Complete Date<span class="text-danger"> (indicate if active)</span></label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
@@ -1869,12 +1720,12 @@
     </div>
     <!-- /Education Modal -->
 
-    <!-- Experience Modal -->
+    <!-- External Experience Modal -->
     <div id="experience_info" class="modal custom-modal fade" role="dialog">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Work Information</h5>
+                    <h5 class="modal-title">External Work Information</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -1884,11 +1735,11 @@
                         @csrf
                         <div class="card">
                             <div class="card-body">
-                                <h3 class="card-title">Work Experience in Ministry</h3>
+                                <h3 class="card-title">Work Experience</h3>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label>Do you have any work experience in the Loveworld nation</label>
+                                            <label>Do you have any work experience </label>
                                             <select class=" select form-control"  id="workExperience" required name="experience">
                                                 <option>--Select--</option>
                                                 <option  value="Yes" {{ $staff->work()->experience ?? '' == 'Yes' ? 'selected' : '' }}>Yes</option>
@@ -1898,57 +1749,22 @@
                                     </div>
                                 </div>
                                 <div class="row" id="showWork">
-                                    <div class="col-md-4">
+                                    <div class="col-md-12">
                                         <div class="form-group">
-                                            <label>From <span class="text-danger">*</span></label>
-                                            <div class="cal-icon">
-                                                <input type="text" class="form-control floating mydatetimepicker" name="start_date"   value="{{$staff->work()->ministry_start_date ??''}}" >
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>To <span class="text-danger">*</span></label>
-                                            <div class="cal-icon">
-                                                <input type="text" class="form-control floating mydatetimepicker" name="end_date"   value="{{$staff->work()->ministry_end_date ?? ''}}" >
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Job Role <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" name="job_role" required value="{{$staff->work()->ministry_job_role ?? ''}}">
+                                            <label>Organization Name <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" name="company" required value="{{$staff->work()->company ?? ''}}">
 
                                         </div>
                                     </div>
 
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card">
-                            <div class="card-body">
-                                <h3 class="card-title">Work History in Healing School</h3>
-                                <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>From <span class="text-danger">*</span></label>
-                                            <div class="cal-icon">
-                                            <input type="text" class="form-control floating mydatetimepicker" name="start_date"   value="{{$staff->work()->start_date ??''}}" >
-                                            </div>
-                                        </div>
+                                            <label>Unit/Dapartment <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" name="unit" required value="{{$staff->work()->unit ?? ''}}">
 
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Too <span class="text-danger">*</span></label>
-                                            <div class="cal-icon">
-                                            <input type="text" class="form-control floating mydatetimepicker" name="end_date"   value="{{$staff->work()->end_date ?? ''}}" >
-                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Job Role <span class="text-danger">*</span></label>
                                             <input type="text" class="form-control" name="job_role" required value="{{$staff->work()->job_role ?? ''}}">
@@ -1956,9 +1772,30 @@
                                         </div>
                                     </div>
 
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>From <span class="text-danger">*</span></label>
+                                            <div class="cal-icon">
+                                                <input type="text" class="date-mask form-control " name="start_date"   value="{{$staff->work()->start_date ??''}}" >
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>To <span class="text-danger">*</span></label>
+
+                                            <div class="cal-icon">
+                                                <input type="text" class="date-mask form-control " name="end_date"   value="{{$staff->work()->end_date ??''}}" >
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
+
+
                         <div class="submit-section">
                             <button class="btn btn-primary submit-btn">Submit</button>
                         </div>
@@ -1967,7 +1804,206 @@
             </div>
         </div>
     </div>
-    <!-- /Experience Modal -->
+    <!-- External Experience Modal -->
+        <!-- External Experience Modal -->
+        <div id="ministry_experience_info" class="modal custom-modal fade" role="dialog">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Work Information</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="" enctype="multipart/form-data" method="POST">
+                            @csrf
+                            <div class="card">
+                                <div class="card-body">
+                                    <h3 class="card-title">Work Experience in Ministry</h3>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Do you have any work experience in the Loveworld nation</label>
+                                                <select class=" select form-control"  id="workExperience" required name="experience">
+                                                    <option>--Select--</option>
+                                                    <option  value="Yes" {{ $staff->work()->experience ?? '' == 'Yes' ? 'selected' : '' }}>Yes</option>
+                                                    <option  value="No" {{ $staff->work()->experiencee ?? '' == 'No' ? 'selected' : '' }}>No</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row" id="showWork">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>From <span class="text-danger">*</span></label>
+                                                <div class="cal-icon">
+                                                    <input type="text" class="form-control floating mydatetimepicker" name="start_date"   value="{{$staff->work()->ministry_start_date ??''}}" >
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>To <span class="text-danger">*</span></label>
+
+                                                <input type="text" class="form-control " name="end_date"   value="{{$staff->work()->ministry_end_date ?? ''}}" >
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Job Role <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" name="job_role" required value="{{$staff->work()->ministry_job_role ?? ''}}">
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-body">
+                                    <h3 class="card-title">Work History in Healing School</h3>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>From <span class="text-danger">*</span></label>
+                                                <div class="cal-icon">
+                                                    <input type="text" class="form-control floating mydatetimepicker" name="start_date"   value="{{$staff->work()->start_date ??''}}" >
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Too <span class="text-danger">*</span></label>
+                                                <div class="cal-icon">
+                                                    <input type="text" class="form-control floating mydatetimepicker" name="end_date"   value="{{$staff->work()->end_date ?? ''}}" >
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Job Role <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" name="job_role" required value="{{$staff->work()->job_role ?? ''}}">
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="submit-section">
+                                <button class="btn btn-primary submit-btn">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- External Experience Modal -->
+
+        <!-- External Experience Modal -->
+        <div id="department_experience_info" class="modal custom-modal fade" role="dialog">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Work Information</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="" enctype="multipart/form-data" method="POST">
+                            @csrf
+                            <div class="card">
+                                <div class="card-body">
+                                    <h3 class="card-title">Work Experience in Ministry</h3>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Do you have any work experience in the Loveworld nation</label>
+                                                <select class=" select form-control"  id="workExperience" required name="experience">
+                                                    <option>--Select--</option>
+                                                    <option  value="Yes" {{ $staff->work()->experience ?? '' == 'Yes' ? 'selected' : '' }}>Yes</option>
+                                                    <option  value="No" {{ $staff->work()->experiencee ?? '' == 'No' ? 'selected' : '' }}>No</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row" id="showWork">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>From <span class="text-danger">*</span></label>
+                                                <div class="cal-icon">
+                                                    <input type="text" class="form-control floating mydatetimepicker" name="start_date"   value="{{$staff->work()->ministry_start_date ??''}}" >
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>To <span class="text-danger">*</span></label>
+
+                                                <input type="text" class="form-control " name="end_date"   value="{{$staff->work()->ministry_end_date ?? ''}}" >
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Job Role <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" name="job_role" required value="{{$staff->work()->ministry_job_role ?? ''}}">
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-body">
+                                    <h3 class="card-title">Work History in Healing School</h3>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>From <span class="text-danger">*</span></label>
+                                                <div class="cal-icon">
+                                                    <input type="text" class="form-control floating mydatetimepicker" name="start_date"   value="{{$staff->work()->start_date ??''}}" >
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Too <span class="text-danger">*</span></label>
+                                                <div class="cal-icon">
+                                                    <input type="text" class="form-control floating mydatetimepicker" name="end_date"   value="{{$staff->work()->end_date ?? ''}}" >
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Job Role <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" name="job_role" required value="{{$staff->work()->job_role ?? ''}}">
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="submit-section">
+                                <button class="btn btn-primary submit-btn">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- External Experience Modal -->
     @endsection
 
 @section('script')
@@ -2056,9 +2092,9 @@
                             <div class="col-md-6">
                                 <div class="form-group form-focus focused">
                                     <div class="cal-icon">
-                                        <input type="text" class="date-mask form-control " name="complete_date[]">
+                                        <input type="text" class="form-control " name="complete_date[]">
                                     </div>
-                                    <label class="focus-label">Complete Date<span class="text-danger"> (dd/mm/yyyy)</span></label>
+                                    <label class="focus-label">Complete Date<span class="text-danger"> (indicate if active)</span></label>
                                 </div>
                             </div>
                             <div class="col-md-6">
